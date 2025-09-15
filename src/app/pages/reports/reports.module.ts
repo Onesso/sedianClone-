@@ -9,6 +9,7 @@ import { IprsLogsComponent } from './iprs-logs/iprs-logs/iprs-logs.component';
 import { KraLogsComponent } from './kra-logs/kra-logs.component';
 import { FailedIprsComponent } from './failed-iprs/failed-iprs.component';
 import { FailedKraComponent } from './failed-kra/failed-kra.component';
+import { DropOffComponent } from './drop-off/drop-off.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbToastModule, NgbDropdownModule, NgbNavModule, NgbTypeaheadModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { FeatherModule } from 'angular-feather';
@@ -34,7 +35,7 @@ import { DocumentPipe } from './document.pipe';
 @NgModule({
   declarations: [
     ApprovedExceptionsComponent,
-    RejectedExceptionsComponent, 
+    RejectedExceptionsComponent,
     IprsLogsComponent,
     KraLogsComponent,
     FailedIprsComponent,
@@ -42,11 +43,12 @@ import { DocumentPipe } from './document.pipe';
     DocumentsArchivedComponent,
     ReportsPipe,
     DocumentPipe
+
   ],
   imports: [
     CommonModule,
     ReportsRoutingModule,
-
+    DropOffComponent,
     NgbToastModule,
     FeatherModule.pick(allIcons),
     CountUpModule,
@@ -68,7 +70,7 @@ import { DocumentPipe } from './document.pipe';
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ReportsModule { 
+export class ReportsModule {
   constructor() {
     defineElement(lottie.loadAnimation);
   }
