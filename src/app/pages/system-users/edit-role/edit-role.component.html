@@ -1,0 +1,162 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="Edit Role" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header justify-content-between align-items-center">
+              <!-- <div>
+                  <h4 class="card-title mb-0">New User</h4>
+              </div> -->              
+                <div class="text-end ">
+                  <button type="button" class="btn btn-soft-primary btn-sm" routerLink="/app/system-users/roles">
+                      <i
+                          class="ri-arrow-left-fill align-bottom"></i> Back
+                  </button>
+                </div>
+  
+            </div><!-- end card header -->
+  
+            <div class="card-body">
+                <form (ngSubmit)="updateGroup()" [formGroup]="userForm">              
+                    <div class="mt-4">                    
+                        <div class="row">
+                          <div class="col-xl-12 col-12">
+                              <div class="mb-3">
+                                  <label for="cleave-delimiter" class="form-label">Role Name</label>
+                                  <input type="text" formControlName="name" class="form-control" id="labelInput">
+                              </div>
+                          </div><!-- end col -->                                                
+                        </div><!-- end row -->                                
+                    </div>
+  
+                    <div class="d-flex justify-content-center align-items-center" *ngIf="authLoading">
+                      <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                          <span class="sr-only">Loading...</span>
+                      </div>
+                  </div>
+               
+                    <div *ngIf="!authLoading" class="">            
+                      <div class="row">
+                          <div class="col-xl-3 col-lg-3 col-md-2">
+                              <div class="mb-1">
+                                  <label for="cleave-ccard" class="form-label fw-bold">Dashboard Menu</label>                               
+                              </div>
+  
+                              <div class="form-check mb-2"                           
+                              *ngFor="let perm of this.mainMenu?.DashboardMenu?.menus;
+                              let indexOfelement = index">
+                                  <input                                
+                                   class="form-check-input"
+                                    type="checkbox"                                  
+                                     [id]="perm.id"                                   
+                                     [checked]="perm.allow"
+                                     (change)="testData($event, indexOfelement, 'dashboard',perm)"
+                                     >
+                                  <label class="form-check-label" for="formCheck1">
+                                      {{perm.name}}
+                                  </label>
+                              </div>
+                          </div>     
+                          
+                          <div class="col-xl-3 col-lg-3 col-md-2"
+                         >
+                              <div class="mb-1">
+                                  <label for="cleave-ccard" class="form-label fw-bold">Reports Menu</label>                               
+                              </div>
+  
+                              <div class="form-check mb-2"
+                              *ngFor="let usersauth of this.mainMenu?.ReportsMenu?.menus;
+                              let indexOfelement = index"
+                              >
+                                  <input
+                                   class="form-check-input" 
+                                   type="checkbox"
+                                   [id]="usersauth.id"                               
+                                   [checked]="usersauth.allow"
+                                   (change)="testData($event, indexOfelement,'reports',usersauth)"
+                                   >
+                                  <label class="form-check-label" for="formCheck1">
+                                      {{ usersauth.name }}
+                                  </label>
+                              </div>
+                          </div> 
+  
+                          <div class="col-xl-3 col-lg-3 col-md-2"
+                        
+                           >
+                              <div class="mb-1">
+                                  <label for="cleave-ccard" class="form-label fw-bold">Settings Menu</label>                               
+                              </div>
+  
+                              <div class="form-check mb-2"
+                              *ngFor="
+                              let custauth of this.mainMenu?.SettingsMenu?.menus;
+                              let indexOfelement = index">
+                                  <input                              
+                                  [checked]="custauth.allow"
+                                  (change)="testData($event, indexOfelement,'settings',custauth)"
+                                  class="form-check-input" 
+                                  type="checkbox" 
+                                  [id]="custauth.id">
+                                  <label class="form-check-label" for="formCheck1">
+                                      {{ custauth.name }}
+                                  </label>
+                              </div>
+                          </div> 
+  
+                          <div class="col-xl-3 col-md-2">
+                              <div class="mb-1">
+                                  <label for="cleave-ccard" class="form-label fw-bold">Marketing Menu</label>                               
+                              </div>
+  
+                              <div class="form-check mb-2" 
+                              *ngFor="
+                              let settingsauth of this.mainMenu?.MarketingMenu?.menus;
+                              let indexOfelement = index">
+                                  <input                                                        
+                                  [checked]="settingsauth.allow"
+                                  (change)="testData($event, indexOfelement,'marketing',settingsauth)"
+                                  class="form-check-input" 
+                                  type="checkbox"
+                                  [id]="settingsauth.id">
+                                  <label class="form-check-label" for="formCheck1">
+                                      {{settingsauth.name}}
+                                  </label>
+                              </div>
+                          </div> 
+                      </div><!-- end row -->
+  
+                                      
+                  </div>
+                  <div class="d-flex justify-content-between gap-2 mb-3 mt-2"> 
+                      <button type="button" class="btn btn-soft-primary btn-load btn-lg"           
+                      >
+                        <span class="d-flex align-items-center">
+                            <span class="flex-grow-1 me-2" routerLink="/app/system-users/roles">
+                                Cancel
+                            </span>                          
+                        </span>
+                    </button>
+                    <button type="submit" class="btn btn-primary btn-load btn-lg" [disabled]="userForm.invalid"       
+                      >
+                        <span class="d-flex align-items-center">
+                            <span class="flex-grow-1 me-2">
+                                Submit
+                            </span>
+                            <span class="spinner-border flex-shrink-0" role="status" *ngIf="loading">
+                                <span class="visually-hidden">Loading...</span>
+                            </span>
+                        </span>
+                    </button>
+                    </div>
+                </form><!-- end form -->
+            </div><!-- end card-body -->
+            
+        </div><!-- end card -->
+    </div>
+    <!-- end col -->
+  </div>
+  <!-- end row -->

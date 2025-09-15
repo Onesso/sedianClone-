@@ -1,0 +1,265 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="Parent Account" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card" id="applicationList">
+            <div class="card-header  border border-dashed border-end-0 border-start-0">
+                <div class="d-md-flex justify-content-between align-items-center">
+                    <div class="search-box">
+                        <input type="text" class="form-control search"
+                            placeholder="Search..."
+                            [(ngModel)]="service.searchTerm">
+                        <i class="ri-search-line search-icon"></i>
+                    </div>
+                    <div class="flex-shrink-0">
+                        <div class="d-flex gap-1 flex-wrap">
+                            <button type="button" class="btn btn-warning add-btn" data-bs-toggle="modal" id="create-btn"
+                                data-bs-target="#showModal" (click)="openModal(content)"><i
+                                    class="ri-add-line align-bottom me-1"></i> New Parent Account</button>                                                   
+                        </div>
+                    </div>
+                </div>
+            </div>
+   
+            <div class="card-body pt-0">
+                <div>                 
+                    <table class="table table-nowrap align-middle">
+                        <thead class="text-muted table-light">
+                            <tr class="text-uppercase">                                                              
+                                <th appsortable="id"
+                                    style="width: 140px;">Date Created</th>
+                                <th appsortable="name">Description
+                                </th>
+                                <th appsortable="designation">
+                                    Created By</th>                               
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="list form-check-all">
+                            <tr *ngFor="let data of rows;let i = index">                             
+                                <td class="id"><a href="javascript:void(0);"
+                                        class="fw-medium link-primary">{{data.createdDate}}</a>
+                                </td>
+                                <td class="designation">{{data.shortDescription}}</td>
+                                <td class="date">{{data.createdBy}}</td>                      
+                                <td>
+                                    <ul class="list-inline hstack gap-2 mb-0">   
+                                        <li class="list-inline-item" data-bs-toggle="tooltip"
+                                        data-bs-trigger="hover" data-bs-placement="top"                                        
+                                        ngbTooltip="Edit">
+                                        <button class="btn btn-sm view-btn edit-item-btn" (click)="openEditModal(editcontent,data)"                                      
+                                            ><i class="ri-pencil-fill fs-16"></i></button>
+                                   
+                                        </li>  
+                                        
+                                        <li class="list-inline-item me-0" data-bs-toggle="tooltip"
+                                        data-bs-trigger="hover" data-bs-placement="top"
+                                        ngbTooltip="Remove">
+                                            <button class="btn btn-sm delete-btn edit-item-btn"
+                                            data-bs-toggle="modal"
+                                            (click)="confirm(deletemodal,data.id)">
+                                            <i class="ri-delete-bin-5-fill fs-16"></i></button>
+                                        </li>                             
+                                      
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+      
+
+                <!-- Tab Pane -->
+                <div class="table-responsive table-card mb-1">
+                    <div class="noresult" style="display: none">
+                        <div class="text-center">
+                            <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop"
+                                colors="primary:#405189,secondary:#0ab39c" style="width:75px;height:75px">
+                            </lord-icon>
+                            <h5 class="mt-2">Sorry! No Result Found</h5>
+                            <p class="text-muted">We've searched more than 150+ result We did not find jobs for you
+                                search.</p>
+                        </div>
+                    </div>                      
+                </div>
+                <div class="row justify-content-md-between align-items-md-center">
+                    <div class="col col-sm-6">
+                        <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">
+                            Showing
+                            {{this.startIndex}} to
+                            {{this.endIndex}} of {{this.totalRecords}}
+                            entries
+                        </div>
+                    </div>
+                    <!-- Pagination -->
+                    <div class="col col-sm-6">
+                        <div class="text-sm-right float-sm-end listjs-pagination">
+                            <ngb-pagination [collectionSize]="this.totalRecords" [(page)]="this.currentPage"
+                                [pageSize]="this.pageSize" (pageChange)="onPageChange($event)">
+                            </ngb-pagination>
+                        </div>
+                    </div>
+                    <!-- End Pagination -->
+                </div>
+
+                <div id="elmLoader">
+                    <div class="spinner-border text-primary avatar-sm" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+                </div>
+
+
+                <!-- Modal -->
+                <ng-template #content role="document" let-modal>
+                    <div class="modal-header bg-light p-3">
+                        <h5 class="modal-title" id="exampleModalLabel">New Parent Account&nbsp;</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            (click)="modal.dismiss('close click')" id="close-modal"></button>
+                    </div>
+                    <form action="#" autocomplete="off" (ngSubmit)="create()" [formGroup]="createForm">
+                        <div class="modal-body">
+                         
+                            <div class="mb-3">
+                                <label for="contact-field" class="form-label">Short Description</label>
+                                <textarea type="text" id="contact-field" class="form-control" placeholder=""
+                                formControlName="short_desc" required ></textarea>
+                            </div>                             
+                            <div class="mb-3">
+                                <label for="contact-field" class="form-label">Long Description</label>
+                                <textarea type="text" id="contact-field" class="form-control" placeholder=""
+                                formControlName="long_desc" required ></textarea>
+                            </div>           
+
+
+                            <div class="mb-3">
+                                <div>
+                                    <label for="status-input" class="form-label">Account Enabled?</label>
+                                    <select class="form-control" data-trigger name="status-input" id="status-input"
+                                        formControlName="enableAccount">
+                                        <option selected>Select</option>
+                                        <option value="Y">Yes</option>
+                                        <option value="N">No</option>                                
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="contact-field" class="form-label">Account Image</label>
+                                <dropzone
+                                 class="dropzone_sec" 
+                                 [config]="config" fxLayout="row" 
+                                 fxLayoutAlign="start strech" 
+                                 fxFlex="auto"                             
+                                 (success)="onUploadSuccess($event)"
+                                 ></dropzone>
+                            </div>    
+                        </div>
+                        <div class="mt-4">
+                            <div class="hstack d-flex gap-2 justify-content-between mx-4 mb-4">
+                                <div>
+                                    <!-- "Close" button -->
+                                    <button type="button" class="btn btn-light w-100 btn-lg" data-bs-dismiss="modal" (click)="modal.dismiss('close click')">Close</button>
+                                </div>
+                                <div>
+                                    <!-- "Add" button -->
+                                    <button type="submit" class="btn btn-primary w-100 btn-lg" id="add-btn" [disabled]="loading || !createForm.valid || !fileUploaded">Create
+                                        <span class="spinner-border spinner-border-sm ml-2" role="status" aria-hidden="true" *ngIf="loading"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>                        
+                    </form>
+                </ng-template>
+                <!-- Modal -->
+
+                <ng-template #editcontent role="document" let-modal>
+                    <div class="modal-header bg-light p-3">
+                        <h5 class="modal-title" id="exampleModalLabel">Update Parent Account&nbsp;</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            (click)="modal.dismiss('close click')" id="close-modal"></button>
+                    </div>
+                    <form action="#" autocomplete="off" (ngSubmit)="update()" [formGroup]="editForm">
+                        <div class="modal-body">
+                         
+                            <div class="mb-3">
+                                <label for="contact-field" class="form-label">Short Description</label>
+                                <textarea type="text" id="contact-field" class="form-control" placeholder=""
+                                formControlName="short_desc" required ></textarea>
+                            </div>                             
+                            <div class="mb-3">
+                                <label for="contact-field" class="form-label">Long Description</label>
+                                <textarea type="text" id="contact-field" class="form-control" placeholder=""
+                                formControlName="long_desc" required ></textarea>
+                            </div>           
+
+
+                            <div class="mb-3">
+                                <div>
+                                    <label for="status-input" class="form-label">Account Enabled?</label>
+                                    <select class="form-control" data-trigger name="status-input" id="status-input"
+                                        formControlName="enableAccount">
+                                        <option selected>Select</option>
+                                        <option value="Y">Yes</option>
+                                        <option value="N">No</option>                                
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="contact-field" class="form-label">Account Image</label>
+                                <dropzone
+                                 class="dropzone_sec" 
+                                 [config]="config" fxLayout="row" 
+                                 fxLayoutAlign="start strech" 
+                                 fxFlex="auto"                             
+                                 (success)="onUploadSuccess($event)"
+                                 ></dropzone>
+                            </div>    
+                        </div>
+                        <div class="mt-4">
+                            <div class="hstack d-flex gap-2 justify-content-between mx-4 mb-4">
+                                <div>
+                                    <!-- "Close" button -->
+                                    <button type="button" class="btn btn-light w-100 btn-lg" data-bs-dismiss="modal" (click)="modal.dismiss('close click')">Close</button>
+                                </div>
+                                <div>
+                                    <!-- "Add" button -->
+                                    <button type="submit" class="btn btn-primary w-100 btn-lg" id="add-btn" [disabled]="loading || !editForm.valid ">Create
+                                        <span class="spinner-border spinner-border-sm ml-2" role="status" aria-hidden="true" *ngIf="loading"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>                        
+                    </form>
+                </ng-template>
+
+
+                <ng-template #deletemodal role="document" let-modal>
+                    <div class="modal-body p-5 text-center">
+                        <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop"
+                            colors="primary:#405189,secondary:#f06548" style="width:90px;height:90px">
+                        </lord-icon>
+                        <div class="mt-4 text-center">
+                            <h4>You are about to delete an bundle product?</h4>
+                            <p class="text-muted fs-15 mb-4">Deleting your order will remove all of your
+                                information from our database.</p>
+                            <div class="hstack gap-2 justify-content-center remove">
+                                <button class="btn btn-light link-success fw-medium text-decoration-none"
+                                    id="deleteRecord-close" data-bs-dismiss="modal"
+                                    (click)="modal.dismiss('close click')"><i
+                                        class="ri-close-line me-1 align-middle cursor-pointer"></i> Close</button>
+                                <button class="btn btn-danger cursor-pointer" id="delete-record" (click)="deleteData()">Yes,
+                                    Delete
+                                    It <span class="spinner-border spinner-border-sm ml-2" role="status" aria-hidden="true" *ngIf="loading"></span></button>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+                <!--end modal -->
+            </div>
+        </div>
+
+    </div>
+    <!--end col-->
+</div>

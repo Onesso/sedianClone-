@@ -1,0 +1,135 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Rejected Exceptions</h4>
+            </div><!-- end card header -->
+
+            <div class="card-body">
+                <div id="customerList">
+                    <div class="card-header border border-dashed border-end-0 border-start-0">
+                        <div class="row g-3">
+                            <div class="col-lg-4 col-sm-6">
+                                <div class="search-box">
+                                    <input type="text" class="form-control search"
+                                        placeholder="Search by National ID"
+                                        [(ngModel)]="searchObject">
+                                    <i class="ri-search-line search-icon"></i>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-sm-6">
+                                <div class="mb-3">                            
+                                    <input [(ngModel)]="selectedStartDate" class="form-control flatpickr-input" (change)="onStartDateSelect()" placeholder="Start date" type="text" mwlFlatpickr [altInput]="true" [convertModelValue]="true">
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-sm-6">
+                                <div class="mb-3">
+                                    <input  [(ngModel)]="selectedEndDate" class="form-control flatpickr-input" placeholder="End date" (change)="onEndDateSelect()" type="text" mwlFlatpickr [altInput]="true" [convertModelValue]="true">
+                                </div>
+                            </div> 
+        
+                            <div class="col-lg-2 col-sm-4" >
+                                <button     
+                                (click)="searchRecordByDate()"                            
+                                type="button" class="btn btn-primary w-100"> 
+                                    <i class="ri-filter-3-line me-1 align-bottom"></i>
+                                Search
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="searchingCustomer"></span>
+                                </button>
+                          
+                            </div>                          
+                            
+        
+                            <div class="col-lg-2 col-12">
+                                <div>
+                                 <button (click)="exportexcel()" type="button" class="btn btn-warning w-100"><i
+                                    class="ri-file-excel-2-line align-bottom me-1"></i> Excel</button>
+                                </div>
+                            </div>                            
+                        </div>               
+                    </div>
+
+                    <div class="table-responsive table-card mt-3 mb-1">
+                        <table class="table" id="customerTable">
+                            <thead>
+                                <tr class="bg-light text-muted">                                   
+                                    <th listsortable="customer_name">Date Created</th>
+                                    <th  listsortable="email" >ID NO.</th>
+                                    <th listsortable="phone">Name</th>
+                                    <th  listsortable="date">Exception</th>
+                                    <th  listsortable="status">Comments</th>   
+                                    <th  listsortable="status">Approved By</th>  
+                                    <th  listsortable="status">Approval Date</th>                                 
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let data of approved | reports: searchObject; let i=index">                                
+                                    <td>{{data.created_date | date: 'medium'}}</td>
+                                    <td>{{data.national_id}}</td>
+                                    <td>{{data.accountTitle}}</td>
+                                    <td>{{data.exception_id}}</td>       
+                                    <td>{{data.reason}}</td>  
+                                    <td>{{data.approvedBy}}</td>   
+                                    <td>{{data?.approvalDate | date: 'medium'}}</td>                                  
+                                                             
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="row justify-content-md-between align-items-md-center">
+                        <div class="col col-sm-6">
+                            <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">
+                                Showing
+                                {{this.startIndex}} to
+                                {{this.endIndex}} of {{this.totalRecords}}
+                                entries
+                            </div>
+                        </div>
+                        <!-- Pagination -->
+                        <div class="col col-sm-6">
+                            <div class="text-sm-right float-sm-end listjs-pagination">
+                                <ngb-pagination [collectionSize]="this.totalRecords" [(page)]="this.currentPage"
+                                    [pageSize]="this.pageSize" (pageChange)="onPageChange($event)">
+                                </ngb-pagination>
+                            </div>
+                        </div>
+
+                        <div *ngIf="this.rows.length === 0 && !loading" class="table-responsive table-card mb-1">
+                            <div class="noresult" >
+                                <div class="text-center">
+                                    <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop"
+                                        colors="primary:#405189,secondary:#0ab39c" style="width:75px;height:75px">
+                                    </lord-icon>
+                                    <h5 class="mt-2">Sorry! No Records Found</h5>
+                                    <p class="text-muted">We've searched more than 150+ result We did not find results for you
+                                        search.</p>
+                                </div>
+                            </div>
+                            <div></div>
+                        </div>  
+                        
+                        <div class="d-flex justify-content-center align-items-center" *ngIf="loading">
+                            <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </div>
+                        <!-- End Pagination -->
+                    </div>
+                </div>
+            </div><!-- end card -->
+            
+        </div>
+        
+        <!-- end col -->
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->
+
+
+

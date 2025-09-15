@@ -1,0 +1,376 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title={{this.name}} [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+<div class="d-flex justify-content-center align-items-center" *ngIf="loading">
+    <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
+<div class="row mb-3" >
+  <div class="col-xl-8">
+    <div class="widget-top-overflow text-white">
+        <div class="height-200 overflow-hidden bg-home">
+        <!--Banner Section-->
+        </div>
+    </div>
+
+
+    <div class="card">
+        <div class="row" [photoGalleryGroup]="{ arrowEl: true, indexIndicatorSep: ' - ' }">
+            <div class="col-md-12 col-12 text-center" style="height: 25% !important;">
+              <span class="thumb-xl">
+                <div [photoGallery]="this.images[0].src" style="cursor: pointer;">
+                    <img *ngIf="this.images[0].src" class="img-fluid rounded-image  mt-2" [src]="this.images[0].src" alt="..." height="200" width="150" />
+                </div>       
+                <div>
+                    <img *ngIf="!this.images[0].src" class="img-fluid rounded-image" src="assets/images/profile-ph.png" alt="..." height="200" width="150" />
+                </div>        
+                
+              </span>
+              <div class="post-user post-user-profile mt-3">
+                <span class="thumb-xl">
+                  <h4>                 
+                    {{ this.details[0]?.customerName }}
+                  </h4>
+                  <h6 >Phone No: <span  class="text-muted">{{this.details[0]?.phone}}</span>  Email:<span class="text-muted">{{this.details[0]?.email}}</span></h6>
+                </span>
+              </div>
+            </div>
+          </div>
+    </div>
+
+      <div class="card">
+        <div class="card-header border-bottom-dashed">
+            <h5 class="card-title mb-0">Preference Details</h5>
+        </div>     
+        <div class="card-body pt-2">
+            <div class="table-responsive">
+                <table class="table table-borderless mb-0">
+                    <tbody>
+                        <tr>
+                            <td>Branch<span class="text-muted">(SIDIAN BRANCH)</span>: </td>
+                            <td class="text-end"><span id="cart-subtotal"> {{ this.details[0]?.bankBranch}}</span></td>
+                        </tr>
+                        <tr>
+                            <td>Branch Code: </td>
+                            <td class="text-end"><span id="cart-subtotal"> {{ this.details[0]?.branchCode}}</span></td>
+                        </tr>
+                        <tr>
+                            <td>Nationality: </td>
+                            <td class="text-end"><span id="cart-discount">{{ this.details[0]?.nationality }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>Country of Residence: </td>
+                            <td class="text-end"><span id="cart-discount">{{ this.details[0]?.residence }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>Physical Address :</td>
+                            <td class="text-end"><span id="cart-shipping">{{ this.details[0]?.physicalAddress }}</span></td>
+                        </tr>                      
+                        <!-- <tr class="table-active">
+                            <th>Total (USD) :</th>
+                            <td class="text-end">
+                                <span class="fw-semibold">
+                                    $ <span id="cart-total">415.96</span>
+                                </span>
+                            </td>
+                        </tr> -->
+                    </tbody>
+                </table>
+            </div>
+            <!-- end table-responsive -->
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header border-bottom-dashed">
+            <h5 class="card-title mb-0">Occupation Details</h5>
+        </div>     
+        <div class="card-body pt-2">
+            <div class="table-responsive">
+                <table class="table table-borderless mb-0">
+                    <tbody>
+                        <tr>
+                            <td>Currency :</td>
+                            <td class="text-end"> <span id="cart-subtotal"> {{ this.details[0]?.currency }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>Occupation Description : </td>
+                            <td class="text-end"><span id="cart-discount"> {{ this.details[0]?.occupation       }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>Industry :</td>
+                            <td class="text-end"><span id="cart-shipping"> {{ this.details[0]?.industry }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>Salary Range : </td>
+                            <td class="text-end"><span id="cart-tax">{{ this.details[0]?.incomeRange }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>Employer Name :</td>
+                            <td class="text-end">
+                                <span class="fw-semibold">
+                                    <span id="cart-total"> {{ this.details[0]?.employerName }}</span>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- end table-responsive -->
+        </div>
+    </div>
+
+
+      <div class="card product">   
+        <div class="card-header border-bottom-dashed">
+            <h5 class="card-title mb-0">SELFIE Vs IPRS Images</h5>
+        </div>  
+        <div class="row gallery-wrapper">
+
+            <div class="element-item col-xxl-3 col-xl-4 col-sm-6 project designing development" *ngFor="let data of images; let i=index" [photoGalleryGroup]="{ arrowEl: true, indexIndicatorSep: ' - ' }" data-category="designing development">
+                <div class="gallery-box card card-border-effect-none">
+                    <span class="thumb-xl" *ngIf="!data.src">                   
+                        <div class="image-popup">
+                            <img  class="img-fluid gallery-img" src="assets/images/noImage.png" alt="..." height="200" width="150" />
+                        </div>                            
+                    </span>
+                    <div class="gallery-container" *ngIf="data.src">
+                        <a class="image-popup" title="" [photoGallery]="data.src">
+                          <div  style="cursor: pointer;">
+                              <img class="gallery-img img-fluid mx-auto" [src]="data.src" alt=""/>
+                          </div>                        
+                          <div class="gallery-overlay">
+                              <h5 class="overlay-caption">{{data.caption}}</h5>
+                          </div>
+                        </a>                      
+                    </div>
+    
+                    <div class="box-content">
+                        <div class="d-flex align-items-center mt-1">
+                            <div class="flex-grow-1 text-muted"><a href="javascript:void(0);" class="text-body text-truncate">{{data.caption}}</a></div>
+                        </div>
+                    </div>
+                </div>          
+            </div>
+      </div>      
+    </div>
+    <!-- end card -->
+
+
+    <div class="card product"> 
+        <div class="card-header border-bottom-dashed">
+            <h5 class="card-title mb-0"> ID and SIGNATURE Images</h5>
+        </div>  
+        <div class="row gallery-wrapper">
+            <div class="element-item col-xxl-3 col-xl-4 col-sm-6 project designing development" *ngFor="let data of photoImages; let i=index" [photoGalleryGroup]="{ arrowEl: true, indexIndicatorSep: ' - ' }" data-category="designing development" >
+                <div class="gallery-box card card-border-effect-none">
+                    <div class="gallery-container" style="cursor: pointer;">
+                        <a class="image-popup" title="" [photoGallery]="data.src">
+                          <div>
+                              <img class="gallery-img img-fluid mx-auto" [src]="data.src" alt=""/>
+                          </div>
+                          
+                            <div class="gallery-overlay">
+                                <h5 class="overlay-caption">{{data.caption}}</h5>
+                            </div>
+                        </a>
+                    </div>
+  
+                    <div class="box-content">
+                        <div class="d-flex align-items-center mt-1">
+                            <div class="flex-grow-1 text-muted"><a href="javascript:void(0);" class="text-body text-truncate">{{data.caption}}</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      </div>
+    </div>
+    <!-- end card -->
+
+    <div class="card" *ngIf="canPerformAction()">
+        <div class="card-header border-bottom-dashed">
+            <h5 class="card-title mb-0">Approve/Reject Exception</h5>
+        </div>
+        <form class="form-vertical" role="form" [formGroup]="activationForm">
+        <div class="card-header bg-light-subtle border-bottom-dashed">
+            <div class="form-check mb-3"  *ngFor="let excep of exception; let i = index">
+                <input class="form-check-input" type="checkbox" id="formCheck{{i}}" formControlName="exceptionDesc" (change)="selectedException(excep, $event)">
+                <label class="form-check-label" for="formCheck{{i}}">
+                {{ excep?.excepDescription }}
+                </label>
+            </div>
+            <!-- <div class="hstack gap-3 px-3 mx-n3 mb-3">
+                <input class="form-control me-auto" type="text" placeholder="Enter coupon code" aria-label="Add Promo Code here...">
+                <button type="button" class="btn btn-primary w-xs">Apply</button>
+            </div>  -->
+            <div class="gap-3">
+                <label class="form-label" for="des-info-description-input">Decision Comments</label>
+                <select placeholder="" class="form-control mb-3 form-select" formControlName="rejectionType" aria-label="">
+                    <option selected></option>
+                    <option *ngFor="let rejection of rejections" value="{{ rejection.recordId }}">
+                        {{ rejection.name }}
+                    </option>
+                </select>
+            </div>     
+            <div class="gap-3">
+                <label class="form-label" for="des-info-description-input">Reason</label>
+                <textarea class="form-control" formControlName="reason" placeholder="Leave a comment for your action..."
+                    id="des-info-description-input" rows="3"></textarea>
+            </div>     
+        </div>  
+
+        <div class="d-flex flex-wrap justify-content-end gap-2 mb-3 mt-2 px-2">
+
+            <button type="button" class="btn btn-outline-danger btn-load" (click)="confirmRejection()"
+                [disabled]="
+                    this.activationForm.invalid ||
+                    this.activationForm.value.rejectionType.length == 0 ||
+                    this.selectedExceptionCodes.length == 0
+                "
+            >
+                <span class="d-flex align-items-center">
+                    <span class="flex-grow-1 me-2">
+                        Reject Application
+                    </span>
+                    <span class="spinner-border flex-shrink-0" role="status" *ngIf="rejectingException">
+                        <span class="visually-hidden">Loading...</span>
+                    </span>
+                </span>
+            </button>
+
+            <button type="button" class="btn btn-success btn-load btn-lg"
+            (click)="confirmApproval()"
+            [disabled]="this.activationForm.invalid || this.selectedExceptionCodes.length == 0"
+            >
+              <span class="d-flex align-items-center">
+                  <span class="flex-grow-1 me-2">
+                      Approve Application
+                  </span>
+                  <span class="spinner-border flex-shrink-0" role="status" *ngIf="approvingException">
+                      <span class="visually-hidden">Loading...</span>
+                  </span>
+              </span>
+          </button>
+            <!-- <button type="button" class="btn btn-info btn-load" (click)="inviteCustomer()">
+                <span class="d-flex align-items-center">
+                    <span class="flex-grow-1 me-2">
+                        Invite Customer to Branch
+                    </span>
+                    <span class="spinner-border flex-shrink-0" role="status" *ngIf="invitingCustomer">
+                        <span class="visually-hidden">Loading...</span>
+                    </span>
+                </span>
+            </button> -->
+        </div>
+       </form>
+     </div>    
+    </div>
+
+  <!-- end col -->
+  <div class="col-xl-4">
+      <div class="sticky-side-div">
+          <div class="card">
+            <div class="text-end mb-2 card-header border-bottom">
+                <button type="button" class="btn btn-soft-primary btn-sm" routerLink="/app/exception/pedding-approvals">
+                    <i
+                        class="ri-arrow-left-fill align-bottom"></i> Back
+                </button>
+            </div>
+              <div class="card-header border-bottom-dashed">
+                  <h5 class="card-title mb-0">Other Information</h5>
+              </div>
+              <!-- <div class="card-header bg-light-subtle border-bottom-dashed">
+                  <div class="text-center">
+                      <h6 class="mb-2">Have a <span class="fw-semibold">promo</span> code ?</h6>
+                  </div>
+                  <div class="hstack gap-3 px-3 mx-n3">
+                      <input class="form-control me-auto" type="text" placeholder="Enter coupon code" aria-label="Add Promo Code here...">
+                      <button type="button" class="btn btn-primary w-xs">Apply</button>
+                  </div>
+              </div> -->
+              <div class="card-body pt-2">
+                  <div class="table-responsive">
+                      <table class="table table-borderless mb-0">
+                          <tbody>
+                              <tr>
+                                  <td>Fatca Y/N :</td>
+                                  <td class="text-end"> <span id="cart-subtotal"> {{ this.details[0]?.fatcaYN?this.details[0]?.fatcaYN:"-" }}</span></td>
+                              </tr>
+                              <tr>
+                                  <td>AML Flag <span class="text-muted">(Risk Rating)</span> : </td>
+                                  <td class="text-end"> <span id="cart-discount">{{ this.details[0]?.amlFlag? this.details[0]?.amlFlag:"-" }}</span></td>
+                              </tr>
+                              <tr>
+                                  <td>SMS Code Confirmed :</td>
+                                  <td class="text-end"> <span id="cart-shipping"> {{ this.details[0]?.smsCodeConfirmYN? this.details[0]?.smsCodeConfirmYN:"-" }}</span></td>
+                              </tr>
+                              <tr>
+                                  <td>KYC Complete : </td>
+                                  <td class="text-end"> <span id="cart-tax">{{ this.details[0]?.kycCompleteYn?this.details[0]?.kycCompleteYn:"-" }}</span></td>
+                              </tr>
+                              <tr>
+                                  <td>Account Bundle :</td>
+                                  <td class="text-end">
+                                      <span class="fw-semibold">
+                                           <span id="cart-total">{{ this.details[0]?.accountBundle? this.details[0]?.accountBundle:"-" }}</span>
+                                      </span>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>Debit Card Ordered :</td>
+                                <td class="text-end">
+                                    <span class="fw-semibold">
+                                         <span id="cart-total">{{ this.details[0]?.orderDebitCard?  this.details[0]?.orderDebitCard :"-" }}</span>
+                                    </span>
+                                </td>
+                            </tr>
+                          </tbody>
+                      </table>
+                  </div>
+                  <!-- end table-responsive -->
+              </div>
+          </div>
+
+          <div class="alert border-dashed alert-primary" role="alert">
+              <div class="d-flex align-items-center" *ngFor="let excep of exception">
+                <lord-icon src="https://cdn.lordicon.com/nkmsrxys.json" trigger="loop"
+                    colors="primary:#121331,secondary:#8c68cd" style="width:80px;height:80px">
+                </lord-icon>
+                  <div class="ms-2 border-bottom-dashed">
+                      <h5 class="fs-14 text-primary fw-semibold"> Exceptions</h5>
+                      <p class="text-body mb-1"> Exception Queue: <span  class="fw-semibold">{{ excep?.codeGroup }}</span><br></p>
+                      <p class="text-body mb-1"> Queue Description: <span  class="fw-semibold"> {{ excep?.codeDescription }}</span><br></p>
+                      <p class="text-body mb-1"> Description: <span  class="fw-semibold"> {{ excep?.excepDescription }}</span><br></p>
+                      <p class="text-body mb-1"> Authorized By: <span  class="fw-semibold"> {{ excep?.authorisedBy ?? '-' }}</span><br></p>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!-- end stickey -->
+
+  </div>
+</div>
+
+<!-- removeItemModal -->
+<ng-template #deleteModel let-modal>
+    <div class="modal-content">
+      <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="btn-close" (click)="modal.dismiss('Cross click')"></button>
+      </div>
+      <div class="modal-body">
+          <div class="mt-2 text-center">
+            <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop" colors="primary:#f7b84b,secondary:#f06548" style="width:100px;height:100px"></lord-icon>
+            <div class="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
+                <h4>Are you sure ?</h4>
+                <p class="text-muted mx-4 mb-0">Are you sure you want to remove this record ?</p>
+            </div>
+          </div>
+          <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
+            <button type="button" class="btn w-sm btn-light" data-bs-dismiss="modal" (click)="modal.close('Close click')">Close</button>
+            <button type="button" class="btn w-sm btn-danger " id="delete-product" (click)="modal.close('Close click')">Yes, Delete It!</button>
+          </div>
+      </div>
+    </div><!-- /.modal-content -->
+</ng-template>

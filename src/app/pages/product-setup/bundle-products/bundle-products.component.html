@@ -1,0 +1,305 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="Products Bundle" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card" id="applicationList">
+            <div class="card-header  border border-dashed border-end-0 border-start-0">
+                <div class="d-md-flex justify-content-between align-items-center">
+                    <div class="search-box">
+                        <input type="text" class="form-control search"
+                            placeholder="Search..."
+                            [(ngModel)]="service.searchTerm">
+                        <i class="ri-search-line search-icon"></i>
+                    </div>
+                    <div class="flex-shrink-0">
+                        <div class="d-flex gap-1 flex-wrap">
+                            <button type="button" class="btn btn-warning add-btn" data-bs-toggle="modal" id="create-btn"
+                                data-bs-target="#showModal" (click)="openModal(content)"><i
+                                    class="ri-add-line align-bottom me-1"></i> New Product Bundle </button>                                                   
+                        </div>
+                    </div>
+                </div>
+            </div>
+   
+            <div class="card-body pt-0">
+                <div>                 
+                    <table class="table table-nowrap align-middle">
+                        <thead class="text-muted table-light">
+                            <tr class="text-uppercase">                                                              
+                                <th appsortable="id"
+                                    style="width: 140px;">Bundle Code</th>
+                                <th appsortable="name">Name
+                                </th>
+                                <th appsortable="designation">
+                                    Created By</th>                               
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="list form-check-all">
+                            <tr *ngFor="let data of rows;let i = index" id="a_{{data.id}}">                             
+                                <td class="id"><a href="javascript:void(0);"
+                                        class="fw-medium link-primary">{{data.code}}</a>
+                                </td>
+                                <td class="designation">{{data.name}}</td>
+                                <td class="date">{{data.createdBy}}</td>                      
+                                <td>
+                                    <ul class="list-inline hstack gap-2 mb-0">     
+                                        <li class="list-inline-item" data-bs-toggle="tooltip"
+                                        data-bs-trigger="hover" data-bs-placement="top"   
+                                        (click)="openEditModal(editcontent,data)"                                     
+                                        ngbTooltip="Edit">
+                                        <button class="btn btn-sm view-btn edit-item-btn"                                       
+                                            ><i class="ri-pencil-fill fs-16"></i></button>
+                                   
+                                        </li>  
+                                        
+                                        <li class="list-inline-item me-0" data-bs-toggle="tooltip"
+                                        data-bs-trigger="hover" data-bs-placement="top"
+                                        ngbTooltip="Remove">
+                                            <button class="btn btn-sm delete-btn edit-item-btn"
+                                            data-bs-toggle="modal"
+                                            (click)="confirm(deletemodal,data.bpdId)">
+                                            <i class="ri-delete-bin-5-fill fs-16"></i></button>
+                                        </li>                                 
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+      
+
+                <!-- Tab Pane -->
+                <div class="table-responsive table-card mb-1">
+                    <div class="noresult" style="display: none">
+                        <div class="text-center">
+                            <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop"
+                                colors="primary:#405189,secondary:#0ab39c" style="width:75px;height:75px">
+                            </lord-icon>
+                            <h5 class="mt-2">Sorry! No Result Found</h5>
+                            <p class="text-muted">We've searched more than 150+ result We did not find jobs for you
+                                search.</p>
+                        </div>
+                    </div>                      
+                </div>
+                <div class="row justify-content-md-between align-items-md-center">
+                    <div class="col col-sm-6">
+                        <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">
+                            Showing
+                            {{this.startIndex}} to
+                            {{this.endIndex}} of {{this.totalRecords}}
+                            entries
+                        </div>
+                    </div>
+                    <!-- Pagination -->
+                    <div class="col col-sm-6">
+                        <div class="text-sm-right float-sm-end listjs-pagination">
+                            <ngb-pagination [collectionSize]="this.totalRecords" [(page)]="this.currentPage"
+                                [pageSize]="this.pageSize" (pageChange)="onPageChange($event)">
+                            </ngb-pagination>
+                        </div>
+                    </div>
+                    <!-- End Pagination -->
+                </div>
+
+                <div id="elmLoader">
+                    <div class="spinner-border text-primary avatar-sm" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+                </div>
+
+                <!-- Modal -->
+                <ng-template #content role="document" let-modal>
+                    <div class="modal-header bg-light p-3">
+                        <h5 class="modal-title" id="exampleModalLabel">New Bundle Product&nbsp;</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            (click)="modal.dismiss('close click')" id="close-modal"></button>
+                    </div>
+                    <form  autocomplete="off" (ngSubmit)="createProduct()" [formGroup]="createForm">
+                        <div class="modal-body">
+
+                            <div class="mb-3" id="modal-id">
+                                <label for="applicationId" class="form-label">Bundle Name</label>
+                                <input type="text" id="name" class="form-control" placeholder="Name"
+                                    formControlName="name"/>
+                            </div>                        
+
+                            <div class="mb-3">
+                                <label for="company-field" class="form-label">Account Code</label>
+                                <input type="text" id="company-field" class="form-control" formControlName="code"
+                                    placeholder="Enter account code" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="merits" class="form-label">Merits</label>
+                                <input type="text" id="company-field" class="form-control" formControlName="merits"
+                                    placeholder=""/>
+                            </div>
+                          
+
+                            <div class="mb-3">
+                                <label for="contact-field" class="form-label">Description</label>
+                                <textarea type="text" id="contact-field" class="form-control" placeholder=""
+                                    formControlName="description"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="contact-field" class="form-label">Short Description</label>
+                                <textarea type="text" id="contact-field" class="form-control" placeholder=""
+                                    formControlName="short_description"></textarea>
+                            </div>
+                            <hr>
+                            <div class="mb-3">
+                                <label for="company-field" class="form-label">Fact Sheet Name</label>
+                                <input type="text" id="company-field" class="form-control" formControlName="fact_sheet_name"
+                                    placeholder="" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="contact-field" class="form-label">Fact Sheet File</label>
+                                <ngx-dropzone (change)="onSheetSelect($event)">
+                                    <ngx-dropzone-label>Click or drag files to upload</ngx-dropzone-label>
+                                    <ngx-dropzone-preview *ngFor="let f of sheetFiles" [removable]="true" (removed)="onSheetRemove(f)">
+                                        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                                    </ngx-dropzone-preview>
+                                </ngx-dropzone>
+                            </div> 
+                            <div class="mb-3">
+                                <label for="company-field" class="form-label">Letter Head Name</label>
+                                <input type="text" id="company-field" class="form-control" formControlName="letter_name"
+                                    placeholder=""/>
+                            </div>
+                            <div class="mb-3">
+                                <label for="contact-field" class="form-label">Letter Head File</label>
+                                <ngx-dropzone (change)="onLetterSelect($event)">
+                                    <ngx-dropzone-label>Click or drag files to upload</ngx-dropzone-label>
+                                    <ngx-dropzone-preview *ngFor="let f of letterFiles" [removable]="true" (removed)="onLetterRemove(f)">
+                                        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                                    </ngx-dropzone-preview>
+                                </ngx-dropzone>
+                            </div> 
+                        </div>
+                        <div class="mt-4">
+                            <div class="hstack d-flex gap-2 justify-content-between mx-4 mb-4">
+                                <div>
+                                    <!-- "Close" button -->
+                                    <button type="button" class="btn btn-light w-100 btn-lg" data-bs-dismiss="modal" (click)="modal.dismiss('close click')">Close</button>
+                                </div>
+                                <div>                                    
+                                    <button type="submit" class="btn btn-primary w-100 btn-lg" id="add-btn" [disabled]="!createForm.valid">Create<span class="spinner-border spinner-border-sm ml-2" role="status" aria-hidden="true" *ngIf="loading"></span></button>
+                                </div>
+                            </div>
+                        </div>                        
+                    </form>
+                </ng-template>
+
+                <!-- Modal -->
+                <ng-template #editcontent role="document" let-modal>
+                    <div class="modal-header bg-light p-3">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Bundle Product&nbsp;</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            (click)="modal.dismiss('close click')" id="close-modal"></button>
+                    </div>
+                    <form  autocomplete="off" (ngSubmit)="updateProduct()" [formGroup]="updateForm">
+                        <div class="modal-body">
+
+                            <div class="mb-3" id="modal-id">
+                                <label for="applicationId" class="form-label">Bundle Name</label>
+                                <input type="text" id="name" class="form-control" placeholder="Name"
+                                    formControlName="name"/>
+                            </div>                        
+
+                            <div class="mb-3">
+                                <label for="company-field" class="form-label">Account Code</label>
+                                <input type="text" id="company-field" class="form-control" formControlName="code"
+                                    placeholder="Enter account code" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="merits" class="form-label">Merits</label>
+                                <input type="text" id="company-field" class="form-control" formControlName="merits"
+                                    placeholder=""/>
+                            </div>                        
+
+                            <div class="mb-3">
+                                <label for="contact-field" class="form-label">Description</label>
+                                <textarea type="text" id="contact-field" class="form-control" placeholder=""
+                                    formControlName="description"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="contact-field" class="form-label">Short Description</label>
+                                <textarea type="text" id="contact-field" class="form-control" placeholder=""
+                                    formControlName="short_description"></textarea>
+                            </div>
+                            <hr>
+                            <div class="mb-3">
+                                <label for="company-field" class="form-label">Fact Sheet Name</label>
+                                <input type="text" id="company-field" class="form-control" formControlName="fact_sheet_name"
+                                    placeholder="" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="contact-field" class="form-label">Fact Sheet File</label>
+                                <ngx-dropzone (change)="onSheetSelect($event)">
+                                    <ngx-dropzone-label>Click or drag files to upload</ngx-dropzone-label>
+                                    <ngx-dropzone-preview *ngFor="let f of sheetFiles" [removable]="true" (removed)="onSheetRemove(f)">
+                                        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                                    </ngx-dropzone-preview>
+                                </ngx-dropzone>
+                            </div> 
+                            <div class="mb-3">
+                                <label for="company-field" class="form-label">Letter Head Name</label>
+                                <input type="text" id="company-field" class="form-control" formControlName="letter_name"
+                                    placeholder=""/>
+                            </div>
+                            <div class="mb-3">
+                                <label for="contact-field" class="form-label">Letter Head File</label>
+                                <ngx-dropzone (change)="onLetterSelect($event)">
+                                    <ngx-dropzone-label>Click or drag files to upload</ngx-dropzone-label>
+                                    <ngx-dropzone-preview *ngFor="let f of letterFiles" [removable]="true" (removed)="onLetterRemove(f)">
+                                        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                                    </ngx-dropzone-preview>
+                                </ngx-dropzone>
+                            </div> 
+                        </div>
+                        <div class="mt-4">
+                            <div class="hstack d-flex gap-2 justify-content-between mx-4 mb-4">
+                                <div>
+                                    <!-- "Close" button -->
+                                    <button type="button" class="btn btn-light w-100 btn-lg" data-bs-dismiss="modal" (click)="modal.dismiss('close click')">Close</button>
+                                </div>
+                                <div>                                    
+                                    <button type="submit" class="btn btn-primary w-100 btn-lg" id="add-btn" [disabled]="!updateForm.valid">Update<span class="spinner-border spinner-border-sm ml-2" role="status" aria-hidden="true" *ngIf="loading"></span></button>
+                                </div>
+                            </div>
+                        </div>                        
+                    </form>
+                </ng-template>
+
+                <!-- Modal -->
+                <ng-template #deletemodal role="document" let-modal>
+                    <div class="modal-body p-5 text-center">
+                        <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop"
+                            colors="primary:#405189,secondary:#f06548" style="width:90px;height:90px">
+                        </lord-icon>
+                        <div class="mt-4 text-center">
+                            <h4>You are about to delete this product bundle?</h4>
+                            <p class="text-muted fs-15 mb-4">Deleting your order will remove all of your
+                                information from our database.</p>
+                            <div class="hstack gap-2 justify-content-center remove">
+                                <button class="btn btn-light link-success fw-medium text-decoration-none"
+                                    id="deleteRecord-close" data-bs-dismiss="modal"
+                                    (click)="modal.dismiss('close click')"><i
+                                        class="ri-close-line me-1 align-middle cursor-pointer"></i> Close</button>
+                                <button class="btn btn-danger cursor-pointer" id="delete-record" (click)="deleteData()">Yes,
+                                    Delete
+                                    It<span class="spinner-border spinner-border-sm ml-2" role="status" aria-hidden="true" *ngIf="loading"></span></button>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+                <!--end modal -->
+            </div>
+        </div>
+
+    </div>
+    <!--end col-->
+</div>

@@ -1,0 +1,1120 @@
+  // {
+  //   id: 3,
+  //   label: 'COMPONENTS',
+  //   isTitle: true
+  // },
+
+  // {
+  //   id: 8,
+  //   label: 'Components',
+  //   icon: 'ri-apps-2-line',
+  //   subItems: [
+  //     {
+  //       id: 10,
+  //       label: 'Chat',
+  //       link: '/app/chat',
+  //       parentId: 8
+  //     },
+  //     {
+  //       id: 11,
+  //       label: 'Email',
+  //       parentId: 8,
+  //       subItems: [
+  //         {
+  //           id: 13,
+  //           label: 'Mailbox',
+  //           link: '/app/mailbox',
+  //           parentId: 11
+  //         },
+  //         {
+  //           id: 14,
+  //           label: 'Mail Templates',
+  //           parentId: 11,
+  //           subItems: [
+  //             {
+  //               id: 13,
+  //               label: 'Basic Action',
+  //               link: '/app/email-basic',
+  //               parentId: 14
+  //             },
+  //             {
+  //               id: 13,
+  //               label: 'Ecommerce Action',
+  //               link: '/app/email-ecommerce',
+  //               parentId: 14
+  //             },
+  //           ]
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       id: 12,
+  //       label: 'Ecommerce',
+  //       link: '/app/mailbox',
+  //       parentId: 8,
+  //       subItems: [
+  //         {
+  //           id: 13,
+  //           label: 'Products',
+  //           link: '/app/ecommerce/products',
+  //           parentId: 12
+  //         },
+  //         {
+  //           id: 14,
+  //           label: 'Product Details',
+  //           link: '/app/ecommerce/product-detail/1',
+  //           parentId: 12
+  //         },
+  //         {
+  //           id: 15,
+  //           label: 'Create Product',
+  //           link: '/app/ecommerce/add-product',
+  //           parentId: 12
+  //         },
+  //         {
+  //           id: 16,
+  //           label: 'Orders',
+  //           link: '/app/ecommerce/orders',
+  //           parentId: 12
+  //         },
+  //         {
+  //           id: 17,
+  //           label: 'Order Details',
+  //           link: '/app/ecommerce/order-details',
+  //           parentId: 12
+  //         },
+  //         {
+  //           id: 18,
+  //           label: 'Customers',
+  //           link: '/app/ecommerce/customers',
+  //           parentId: 12
+  //         },
+  //         {
+  //           id: 19,
+  //           label: 'Shopping Cart',
+  //           link: '/app/ecommerce/cart',
+  //           parentId: 12
+  //         },
+  //         {
+  //           id: 20,
+  //           label: 'Checkout',
+  //           link: '/app/ecommerce/checkout',
+  //           parentId: 12
+  //         },
+  //         {
+  //           id: 21,
+  //           label: 'Sellers',
+  //           link: '/app/ecommerce/sellers',
+  //           parentId: 12
+  //         },
+  //         {
+  //           id: 22,
+  //           label: 'Seller Details',
+  //           link: '/app/ecommerce/seller-details',
+  //           parentId: 12
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       id: 23,
+  //       label: 'Projects',
+  //       parentId: 8,
+  //       subItems: [
+  //         {
+  //           id: 24,
+  //           label: 'List',
+  //           link: '/app/projects/list',
+  //           parentId: 23
+  //         },
+  //         {
+  //           id: 25,
+  //           label: 'Overview',
+  //           link: '/app/projects/overview',
+  //           parentId: 23
+  //         },
+  //         {
+  //           id: 26,
+  //           label: 'Create Project',
+  //           link: '/app/projects/create',
+  //           parentId: 23
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       id: 27,
+  //       label: 'Task',
+  //       parentId: 8,
+  //       subItems: [
+  //         {
+  //           id: 28,
+  //           label: 'Kanban Board',
+  //           link: '/app/tasks/kanban',
+  //           parentId: 27
+  //         },
+  //         {
+  //           id: 29,
+  //           label: 'List',
+  //           link: '/app/tasks/list-view',
+  //           parentId: 27
+  //         },
+  //         {
+  //           id: 30,
+  //           label: 'Task Details',
+  //           link: '/app/tasks/details',
+  //           parentId: 27
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       id: 31,
+  //       label: 'CRM',
+  //       parentId: 8,
+  //       subItems: [
+  //         {
+  //           id: 32,
+  //           label: 'Contacts',
+  //           link: '/app/crm/contacts',
+  //           parentId: 31
+  //         },
+  //         {
+  //           id: 33,
+  //           label: 'Companies',
+  //           link: '/app/crm/companies',
+  //           parentId: 31
+  //         },
+  //         {
+  //           id: 34,
+  //           label: 'Deals',
+  //           link: '/app/crm/deals',
+  //           parentId: 31
+  //         },
+  //         {
+  //           id: 35,
+  //           label: 'Leads',
+  //           link: '/app/crm/leads',
+  //           parentId: 31
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       id: 36,
+  //       label: 'Crypto',
+  //       parentId: 8,
+  //       subItems: [
+  //         {
+  //           id: 37,
+  //           label: 'TRANSACTIONS',
+  //           link: '/app/crypto/transactions',
+  //           parentId: 36
+  //         },
+  //         {
+  //           id: 38,
+  //           label: 'BUY&SELL',
+  //           link: '/app/crypto/buy-sell',
+  //           parentId: 36
+  //         },
+  //         {
+  //           id: 38,
+  //           label: 'ORDERS',
+  //           link: '/app/crypto/orders',
+  //           parentId: 36
+  //         },
+  //         {
+  //           id: 39,
+  //           label: 'MYWALLET',
+  //           link: '/app/crypto/wallet',
+  //           parentId: 36
+  //         },
+  //         {
+  //           id: 40,
+  //           label: 'ICOLIST',
+  //           link: '/app/crypto/ico',
+  //           parentId: 36
+  //         },
+  //         {
+  //           id: 41,
+  //           label: 'KYCAPPLICATION',
+  //           link: '/app/crypto/kyc',
+  //           parentId: 36
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       id: 42,
+  //       label: 'INVOICES',
+  //       parentId: 8,
+  //       subItems: [
+  //         {
+  //           id: 43,
+  //           label: 'LISTVIEW',
+  //           link: '/app/invoices/list',
+  //           parentId: 42
+  //         },
+  //         {
+  //           id: 44,
+  //           label: 'DETAILS',
+  //           link: '/app/invoices/details',
+  //           parentId: 42
+  //         },
+  //         {
+  //           id: 45,
+  //           label: 'CREATEINVOICE',
+  //           link: '/app/invoices/create',
+  //           parentId: 42
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       id: 46,
+  //       label: 'SUPPORTTICKETS',
+  //       parentId: 8,
+  //       subItems: [
+  //         {
+  //           id: 47,
+  //           label: 'LISTVIEW',
+  //           link: '/app/tickets/list',
+  //           parentId: 46
+  //         },
+  //         {
+  //           id: 48,
+  //           label: 'TICKETDETAILS',
+  //           link: '/app/tickets/details',
+  //           parentId: 46
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       id: 46,
+  //       label: 'NFTMARKETPLACE',
+  //       parentId: 8,
+  //       subItems: [
+  //         {
+  //           id: 47,
+  //           label: 'MARKETPLACE',
+  //           link: '/app/marketplace/marketplace',
+  //           parentId: 46
+  //         },
+  //         {
+  //           id: 48,
+  //           label: 'EXPLORENOW',
+  //           link: '/app/marketplace/explore',
+  //           parentId: 46
+  //         },
+  //         {
+  //           id: 48,
+  //           label: 'LIVEAUCTION',
+  //           link: '/app/marketplace/auction',
+  //           parentId: 46
+  //         },
+  //         {
+  //           id: 48,
+  //           label: 'ITEMDETAILS',
+  //           link: '/app/marketplace/item-details',
+  //           parentId: 46
+  //         },
+  //         {
+  //           id: 48,
+  //           label: 'COLLECTIONS',
+  //           link: '/app/marketplace/collections',
+  //           parentId: 46
+  //         },
+  //         {
+  //           id: 48,
+  //           label: 'CREATORS',
+  //           link: '/app/marletplace/creators',
+  //           parentId: 46
+  //         },
+  //         {
+  //           id: 48,
+  //           label: 'RANKING',
+  //           link: '/app/marketplace/raking',
+  //           parentId: 46
+  //         },
+  //         {
+  //           id: 48,
+  //           label: 'WALLETCONNECT',
+  //           link: '/app/marketplace/wallet',
+  //           parentId: 46
+  //         },
+  //         {
+  //           id: 48,
+  //           label: 'CREATENFT',
+  //           link: '/app/marletplace/create',
+  //           parentId: 46
+  //         },
+  //       ]
+  //     },
+  //     {
+  //       id: 49,
+  //       label: 'FILEMANAGER',
+  //       link: '/app/file-manager',
+  //       parentId: 8,
+  //     },
+  //     {
+  //       id: 50,
+  //       label: 'TODO',
+  //       link: '/app/todo',
+  //       parentId: 8,
+  //     },
+  //     {
+  //       id: 51,
+  //       label: 'JOBS',
+  //       parentId: 8,
+  //       subItems: [
+  //         {
+  //           id: 52,
+  //           label: 'STATISTICS',
+  //           link: '/app/jobs/statistics',
+  //           parentId: 51
+  //         },
+  //         {
+  //           id: 53,
+  //           label: 'JOBLISTS',
+  //           subItems: [
+  //             {
+  //               id: 54,
+  //               label: 'LIST',
+  //               link: '/app/jobs/list',
+  //               parentId: 53
+  //             },
+  //             {
+  //               id: 55,
+  //               label: 'GRID',
+  //               link: '/app/jobs/grid',
+  //               parentId: 53
+  //             },
+  //             {
+  //               id: 56,
+  //               label: 'OVERVIEW',
+  //               link: '/app/jobs/overview',
+  //               parentId: 53
+  //             }
+  //           ]
+  //         },
+  //         {
+  //           id: 57,
+  //           label: 'CANDIDATELISTS',
+  //           subItems: [
+  //             {
+  //               id: 58,
+  //               label: 'LISTVIEW',
+  //               link: '/app/jobs/listview',
+  //               parentId: 57
+  //             },
+  //             {
+  //               id: 59,
+  //               label: 'GRIDVIEW',
+  //               link: '/app/jobs/gridview',
+  //               parentId: 57
+  //             }
+  //           ]
+  //         },
+  //         {
+  //           id: 60,
+  //           label: 'APPLICATION',
+  //           link: '/app/jobs/application',
+  //           parentId: 51
+  //         },
+  //         {
+  //           id: 61,
+  //           label: 'NEWJOB',
+  //           link: '/app/jobs/newjob',
+  //           parentId: 51
+  //         },
+  //         {
+  //           id: 62,
+  //           label: 'COMPANIESLIST',
+  //           link: '/app/jobs/companies-list',
+  //           parentId: 51
+  //         },
+  //         {
+  //           id: 63,
+  //           label: 'JOBCATEGORIES',
+  //           link: '/app/jobs/job-categories',
+  //           parentId: 51
+  //         },
+  //       ]
+  //     },
+  //     {
+  //       id: 64,
+  //       label: 'APIKEY',
+  //       link: '/app/apikey',
+  //       parentId: 8,
+  //     },
+  //   ]
+  // },
+  // {
+  //   id: 54,
+  //   label: 'PAGES',
+  //   isTitle: true
+  // },
+
+  // {
+  //   id: 82,
+  //   label: 'PAGES',
+  //   icon: 'ri-pages-line',
+  //   subItems: [
+  //     {
+  //       id: 83,
+  //       label: 'STARTER',
+  //       link: '/app/pages/starter',
+  //       parentId: 82
+  //     },
+  //     {
+  //       id: 84,
+  //       label: 'PROFILE',
+  //       parentId: 82,
+  //       subItems: [
+  //         {
+  //           id: 85,
+  //           label: 'SIMPLEPAGE',
+  //           link: '/app/pages/profile',
+  //           parentId: 84
+  //         },
+  //         {
+  //           id: 86,
+  //           label: 'SETTINGS',
+  //           link: '/app/pages/profile-setting',
+  //           parentId: 84
+  //         },
+  //       ]
+  //     },
+  //     {
+  //       id: 87,
+  //       label: 'TEAM',
+  //       link: '/app/pages/team',
+  //       parentId: 82
+  //     },
+  //     {
+  //       id: 88,
+  //       label: 'TIMELINE',
+  //       link: '/app/pages/timeline',
+  //       parentId: 82
+  //     },
+  //     {
+  //       id: 89,
+  //       label: 'FAQS',
+  //       link: '/app/pages/faqs',
+  //       parentId: 82
+  //     },
+  //     {
+  //       id: 90,
+  //       label: 'PRICING',
+  //       link: '/app/pages/pricing',
+  //       parentId: 82
+  //     },
+  //     {
+  //       id: 91,
+  //       label: 'GALLERY',
+  //       link: '/app/pages/gallery',
+  //       parentId: 82
+  //     },
+  //     {
+  //       id: 92,
+  //       label: 'MAINTENANCE',
+  //       link: '/app/pages/maintenance',
+  //       parentId: 82
+  //     },
+  //     {
+  //       id: 93,
+  //       label: 'COMINGSOON',
+  //       link: '/app/pages/coming-soon',
+  //       parentId: 82
+  //     },
+  //     {
+  //       id: 94,
+  //       label: 'SITEMAP',
+  //       link: '/app/pages/sitemap',
+  //       parentId: 82
+  //     },
+  //     {
+  //       id: 95,
+  //       label: 'SEARCHRESULTS',
+  //       link: '/app/pages/search-results',
+  //       parentId: 82
+  //     },
+  //     {
+  //       id: 96,
+  //       label: 'PRIVACYPOLICY',
+  //       link: '/app/pages/privacy-policy',
+  //       parentId: 82
+  //     },
+  //     {
+  //       id: 97,
+  //       label: 'TERMS&CONDITIONS',
+  //       link: '/app/pages/terms-condition',
+  //       parentId: 82
+  //     }
+  //   ]
+  // },
+  // {
+  //   id: 131,
+  //   label: 'EXTRA PAGES',
+  //   icon: 'ri-rocket-line',
+  //   subItems: [
+  //     {
+  //       id: 85,
+  //       label: 'ONEPAGE',
+  //       link: '/landing',
+  //       parentId: 84
+  //     },
+  //     {
+  //       id: 86,
+  //       label: 'NFTLANDING',
+  //       link: '/landing/nft',
+  //       parentId: 84,
+  //     },
+  //     {
+  //       id: 87,
+  //       label: 'JOB',
+  //       link: '/landing/job',
+  //       parentId: 84,
+  //     },
+  //   ]
+  // },
+  // {
+  //   id: 96,
+  //   label: 'Advanced UI',
+  //   isTitle: true
+  // },
+  // {
+  //   id: 97,
+  //   label: 'Components',
+  //   icon: 'ri-pencil-ruler-2-line',
+  //   subItems: [
+  //     {
+  //       id: 98,
+  //       label: 'ALERTS',
+  //       link: '/app/ui/alerts',
+  //       parentId: 97
+  //     },
+  //     {
+  //       id: 99,
+  //       label: 'BADGES',
+  //       link: '/app/ui/badges',
+  //       parentId: 97
+  //     },
+  //     {
+  //       id: 100,
+  //       label: 'BUTTONS',
+  //       link: '/app/ui/buttons',
+  //       parentId: 97
+  //     },
+  //     {
+  //       id: 101,
+  //       label: 'COLORS',
+  //       link: '/app/ui/colors',
+  //       parentId: 97
+  //     },
+  //     {
+  //       id: 102,
+  //       label: 'CARDS',
+  //       link: '/app/ui/cards',
+  //       parentId: 97
+  //     },
+  //     {
+  //       id: 103,
+  //       label: 'CAROUSEL',
+  //       link: '/app/ui/carousel',
+  //       parentId: 97
+  //     },
+  //     {
+  //       id: 104,
+  //       label: 'DROPDOWNS',
+  //       link: '/app/ui/dropdowns',
+  //       parentId: 97
+  //     },
+  //     {
+  //       id: 105,
+  //       label: 'GRID',
+  //       link: '/app/ui/grid',
+  //       parentId: 97
+  //     },
+  //     {
+  //       id: 106,
+  //       label: 'IMAGES',
+  //       link: '/app/ui/images',
+  //       parentId: 97
+  //     },
+  //     {
+  //       id: 107,
+  //       label: 'TABS',
+  //       link: '/app/ui/tabs',
+  //       parentId: 97
+  //     },
+  //     {
+  //       id: 108,
+  //       label: 'ACCORDION&COLLAPSE',
+  //       link: '/app/ui/accordions',
+  //       parentId: 97
+  //     },
+  //     {
+  //       id: 109,
+  //       label: 'MODALS',
+  //       link: '/app/ui/modals',
+  //       parentId: 97
+  //     },
+  //     {
+  //       id: 111,
+  //       label: 'PLACEHOLDERS',
+  //       link: '/app/ui/placeholder',
+  //       parentId: 97
+  //     },
+  //     {
+  //       id: 112,
+  //       label: 'PROGRESS',
+  //       link: '/app/ui/progress',
+  //       parentId: 97
+  //     },
+  //     {
+  //       id: 113,
+  //       label: 'NOTIFICATIONS',
+  //       link: '/app/ui/notifications',
+  //       parentId: 97
+  //     },
+  //     {
+  //       id: 114,
+  //       label: 'MEDIAOBJECT',
+  //       link: '/app/ui/media',
+  //       parentId: 97
+  //     },
+  //     {
+  //       id: 115,
+  //       label: 'EMBEDVIDEO',
+  //       link: '/app/ui/video',
+  //       parentId: 97
+  //     },
+  //     {
+  //       id: 116,
+  //       label: 'TYPOGRAPHY',
+  //       link: '/app/ui/typography',
+  //       parentId: 97
+  //     },
+  //     {
+  //       id: 117,
+  //       label: 'LISTS',
+  //       link: '/app/ui/list',
+  //       parentId: 97
+  //     },
+  //     {
+  //       id: 117_1,
+  //       label: 'LINKS',
+  //       link: '/app/ui/links',
+  //       badge: {
+  //         variant: 'bg-success',
+  //         text: 'MENUITEMS.DASHBOARD.BADGE',
+  //       },
+  //       parentId: 97
+  //     },
+  //     {
+  //       id: 118,
+  //       label: 'GENERAL',
+  //       link: '/app/ui/general',
+  //       parentId: 97
+  //     },
+  //     {
+  //       id: 119,
+  //       label: 'RIBBONS',
+  //       link: '/app/ui/ribbons',
+  //       parentId: 97
+  //     },
+  //     {
+  //       id: 120,
+  //       label: 'UTILITIES',
+  //       link: '/app/ui/utilities',
+  //       parentId: 97
+  //     }
+  //   ]
+  // },
+  // {
+  //   id: 121,
+  //   label: 'Advanced UI',
+  //   icon: 'ri-stack-line',
+  //   subItems: [
+  //     {
+  //       id: 122,
+  //       label: 'Sweet Alerts',
+  //       link: '/app/advance-ui/sweetalerts',
+  //       parentId: 121
+  //     },
+  //     {
+  //       id: 124,
+  //       label: 'Scroll Bar',
+  //       link: '/app/advance-ui/scrollbar',
+  //       parentId: 121
+  //     },
+  //     {
+  //       id: 126,
+  //       label: 'TOUR',
+  //       link: '/app/advance-ui/tour',
+  //       parentId: 121
+  //     },
+  //     {
+  //       id: 127,
+  //       label: 'SWIPERSLIDER',
+  //       link: '/app/advance-ui/swiper',
+  //       parentId: 121
+  //     },
+  //     {
+  //       id: 128,
+  //       label: 'RATTINGS',
+  //       link: '/app/advance-ui/ratings',
+  //       parentId: 121
+  //     },
+  //     {
+  //       id: 129,
+  //       label: 'HIGHLIGHT',
+  //       link: '/app/advance-ui/highlight',
+  //       parentId: 121
+  //     },
+  //     {
+  //       id: 130,
+  //       label: 'SCROLLSPY',
+  //       link: '/app/advance-ui/scrollspy',
+  //       parentId: 121
+  //     }
+  //   ]
+  // },
+  // {
+  //   id: 131,
+  //   label: 'Widgets',
+  //   icon: 'ri-honour-line',
+  //   link: '/app/widgets'
+  // },
+  // {
+  //   id: 132,
+  //   label: 'Forms',
+  //   icon: 'ri-file-list-3-line',
+  //   subItems: [
+  //     {
+  //       id: 133,
+  //       label: 'Basic Elements',
+  //       link: '/app/forms/basic',
+  //       parentId: 132
+  //     },
+  //     {
+  //       id: 134,
+  //       label: 'Form Select',
+  //       link: '/app/forms/select',
+  //       parentId: 132
+  //     },
+  //     {
+  //       id: 135,
+  //       label: 'CHECKBOXS&RADIOS',
+  //       link: '/app/forms/checkboxs-radios',
+  //       parentId: 132
+  //     },
+  //     {
+  //       id: 136,
+  //       label: 'PICKERS',
+  //       link: '/app/forms/pickers',
+  //       parentId: 132
+  //     },
+  //     {
+  //       id: 137,
+  //       label: 'INPUTMASKS',
+  //       link: '/app/forms/masks',
+  //       parentId: 132
+  //     },
+  //     {
+  //       id: 138,
+  //       label: 'ADVANCED',
+  //       link: '/app/forms/advanced',
+  //       parentId: 132
+  //     },
+  //     {
+  //       id: 139,
+  //       label: 'RANGESLIDER',
+  //       link: '/app/forms/range-sliders',
+  //       parentId: 132
+  //     },
+  //     {
+  //       id: 140,
+  //       label: 'VALIDATION',
+  //       link: '/app/forms/validation',
+  //       parentId: 132
+  //     },
+  //     {
+  //       id: 141,
+  //       label: 'WIZARD',
+  //       link: '/app/forms/wizard',
+  //       parentId: 132
+  //     },
+  //     {
+  //       id: 142,
+  //       label: 'EDITORS',
+  //       link: '/app/forms/editors',
+  //       parentId: 132
+  //     },
+  //     {
+  //       id: 143,
+  //       label: 'FILEUPLOADS',
+  //       link: '/app/forms/file-uploads',
+  //       parentId: 132
+  //     },
+  //     {
+  //       id: 144,
+  //       label: 'FORMLAYOUTS',
+  //       link: '/app/forms/layouts',
+  //       parentId: 132
+  //     }
+  //   ]
+  // },
+  // {
+  //   id: 145,
+  //   label: 'Tables',
+  //   icon: 'ri-layout-grid-line',
+  //   subItems: [
+  //     {
+  //       id: 146,
+  //       label: 'BASICTABLES',
+  //       link: '/app/tables/basic',
+  //       parentId: 145
+  //     },
+  //     {
+  //       id: 147,
+  //       label: 'GRIDJS',
+  //       link: '/app/tables/gridjs',
+  //       parentId: 145
+  //     },
+  //     {
+  //       id: 148,
+  //       label: 'LISTJS',
+  //       link: '/app/tables/listjs',
+  //       parentId: 145
+  //     }
+  //   ]
+  // },
+  // {
+  //   id: 149,
+  //   label: 'Charts',
+  //   icon: 'ri-pie-chart-line',
+  //   subItems: [
+  //     {
+  //       id: 150,
+  //       label: 'Apex Charts',
+  //       parentId: 149,
+  //       subItems: [
+  //         {
+  //           id: 151,
+  //           label: 'LINE',
+  //           link: '/app/charts/apex-line',
+  //           parentId: 150
+  //         },
+  //         {
+  //           id: 152,
+  //           label: 'AREA',
+  //           link: '/app/charts/apex-area',
+  //           parentId: 150
+  //         },
+  //         {
+  //           id: 153,
+  //           label: 'COLUMN',
+  //           link: '/app/charts/apex-column',
+  //           parentId: 150
+  //         },
+  //         {
+  //           id: 154,
+  //           label: 'BAR',
+  //           link: '/app/charts/apex-bar',
+  //           parentId: 150
+  //         },
+  //         {
+  //           id: 155,
+  //           label: 'MIXED',
+  //           link: '/app/charts/apex-mixed',
+  //           parentId: 150
+  //         },
+  //         {
+  //           id: 156,
+  //           label: 'TIMELINE',
+  //           link: '/app/charts/apex-timeline',
+  //           parentId: 150
+  //         },
+  //         {
+  //           id: 166_1,
+  //           label: 'RANGEAREA',
+  //           link: '/app/charts/apex-range-area',
+  //           badge: {
+  //             variant: 'bg-success',
+  //             text: 'MENUITEMS.DASHBOARD.BADGE',
+  //           },
+  //           parentId: 150
+  //         },
+  //         {
+  //           id: 166_2,
+  //           label: 'FUNNEL',
+  //           link: '/app/charts/apex-funnel',
+  //           badge: {
+  //             variant: 'bg-success',
+  //             text: 'MENUITEMS.DASHBOARD.BADGE',
+  //           },
+  //           parentId: 150
+  //         },
+  //         {
+  //           id: 157,
+  //           label: 'CANDLSTICK',
+  //           link: '/app/charts/apex-candlestick',
+  //           parentId: 150
+  //         },
+  //         {
+  //           id: 158,
+  //           label: 'BOXPLOT',
+  //           link: '/app/charts/apex-boxplot',
+  //           parentId: 150
+  //         },
+  //         {
+  //           id: 159,
+  //           label: 'BUBBLE',
+  //           link: '/app/charts/apex-bubble',
+  //           parentId: 150
+  //         },
+  //         {
+  //           id: 160,
+  //           label: 'SCATTER',
+  //           link: '/app/charts/apex-scatter',
+  //           parentId: 150
+  //         },
+  //         {
+  //           id: 161,
+  //           label: 'HEATMAP',
+  //           link: '/app/charts/apex-heatmap',
+  //           parentId: 150
+  //         },
+  //         {
+  //           id: 162,
+  //           label: 'TREEMAP',
+  //           link: '/app/charts/apex-treemap',
+  //           parentId: 150
+  //         },
+  //         {
+  //           id: 163,
+  //           label: 'PIE',
+  //           link: '/app/charts/apex-pie',
+  //           parentId: 150
+  //         },
+  //         {
+  //           id: 164,
+  //           label: 'RADIALBAR',
+  //           link: '/app/charts/apex-radialbar',
+  //           parentId: 150
+  //         },
+  //         {
+  //           id: 165,
+  //           label: 'RADAR',
+  //           link: '/app/charts/apex-radar',
+  //           parentId: 150
+  //         },
+  //         {
+  //           id: 166,
+  //           label: 'POLARAREA',
+  //           link: '/app/charts/apex-polar',
+  //           parentId: 150
+  //         },
+         
+  //       ]
+  //     },
+  //     {
+  //       id: 167,
+  //       label: 'CHARTJS',
+  //       link: '/app/charts/chartjs',
+  //       parentId: 149
+  //     },
+  //     {
+  //       id: 168,
+  //       label: 'ECHARTS',
+  //       link: '/app/charts/echarts',
+  //       parentId: 149
+  //     }
+  //   ]
+  // },
+  // {
+  //   id: 169,
+  //   label: 'Icons',
+  //   icon: 'ri-compasses-2-line',
+  //   subItems: [
+  //     {
+  //       id: 170,
+  //       label: 'REMIX',
+  //       link: '/app/icons/remix',
+  //       parentId: 169
+  //     },
+  //     {
+  //       id: 171,
+  //       label: 'BOXICONS',
+  //       link: '/app/icons/boxicons',
+  //       parentId: 169
+  //     },
+  //     {
+  //       id: 172,
+  //       label: 'MATERIALDESIGN',
+  //       link: '/app/icons/materialdesign',
+  //       parentId: 169
+  //     },
+  //     {
+  //       id: 173,
+  //       label: 'LINEAWESOME',
+  //       link: '/app/icons/lineawesome',
+  //       parentId: 169
+  //     },
+  //     {
+  //       id: 174,
+  //       label: 'FEATHER',
+  //       link: '/app/icons/feather',
+  //       parentId: 169
+  //     },
+  //     {
+  //       id: 174,
+  //       label: 'CRYPTOSVG',
+  //       link: '/app/icons/app/icons-crypto',
+  //       parentId: 169,
+  //     },
+  //   ]
+  // },
+  // {
+  //   id: 175,
+  //   label: 'MAPS',
+  //   icon: 'ri-map-pin-line',
+  //   subItems: [
+  //     {
+  //       id: 176,
+  //       label: 'GOOGLE',
+  //       link: '/app/maps/google',
+  //       parentId: 175
+  //     },
+  //     {
+  //       id: 178,
+  //       label: 'LEAFLET',
+  //       link: '/app/maps/leaflet',
+  //       parentId: 175
+  //     }
+  //   ]
+  // },
+  // {
+  //   id: 179,
+  //   label: 'MULTILEVEL',
+  //   icon: 'ri-share-line',
+  //   subItems: [
+  //     {
+  //       id: 180,
+  //       label: 'LEVEL1.1',
+  //       parentId: 179
+  //     },
+  //     {
+  //       id: 181,
+  //       label: 'LEVEL1.2',
+  //       subItems: [
+  //         {
+  //           id: 182,
+  //           label: 'LEVEL1.LEVEL2.1',
+  //           parentId: 181,
+  //         },
+  //         {
+  //           id: 183,
+  //           label: 'LEVEL1.LEVEL2.2',
+  //           parentId: 181,
+  //         }
+  //       ]
+  //     },
+  //   ]
+  //  }

@@ -1,0 +1,174 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs
+  title="Reconcile Wrongly Captured Id"
+  [breadcrumbItems]="breadCrumbItems"
+></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+<div id="elmLoader">
+  <div class="spinner-border text-primary avatar-sm" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+<div
+  class="row"
+  *ngIf="!loading"
+  [photoGalleryGroup]="{ arrowEl: true, indexIndicatorSep: ' - ' }"
+>
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row gx-lg-5">
+          <div
+            class="zoomed-image"
+            *ngIf="zoomedImageUrl"
+            (click)="closeZoomed()"
+          >
+            <img [src]="zoomedImageUrl" />
+          </div>
+          <div class="col-xl-4 col-lg-6 col-12 mx-auto">
+            <div class="product-img-slider sticky-side-div">
+              <ngx-slick-carousel              
+                [config]="config"
+                class="carousel"
+                #slickModal="slick-carousel"
+                (afterChange)="slickChange($event)"
+              >
+                <div
+                  class="swiper-slide"
+                  ngxSlickItem
+                  *ngIf="
+                    details?.imagesInfo[0]?.frontId == null && !loading
+                  "
+                >
+                  <img
+                    src="assets/images/profile-ph.png"
+                    alt=""
+                    class="img-fluid d-block"
+                  />
+                </div>
+                <div
+                  class="swiper-slide rounded"
+                  [photoGallery]="details?.imagesInfo[0]?.frontId "
+                  *ngIf="details?.imagesInfo[0]?.selfieImage.length > 0"
+                  style="cursor: pointer"
+                >
+                  <img
+                    *ngIf="details?.imagesInfo[0]?.frontId "
+                    src="{{ details?.imagesInfo[0]?.frontId  }}"
+                    alt=""
+                    class="img-fluid d-block"
+                  />
+                </div>
+              </ngx-slick-carousel>
+            </div>
+
+          </div>
+          <!-- end col -->
+
+          <div class="col-xl-4 col-lg-6 col-12 mx-auto">
+            <div class="product-img-slider sticky-side-div">
+                <ngx-slick-carousel                
+                  [config]="config"
+                  class="carousel"
+                  #slickModal="slick-carousel"
+                  (afterChange)="slickChange($event)"
+                >
+                  <div
+                    class="swiper-slide"
+                    ngxSlickItem
+                    *ngIf="
+                      details?.imagesInfo[0]?.backId == null && !loading
+                    "
+                  >
+                    <img
+                      src="assets/images/profile-ph.png"
+                      alt=""
+                      class="img-fluid d-block"
+                    />
+                  </div>
+                  <div
+                    class="swiper-slide rounded"
+                    [photoGallery]="details?.imagesInfo[0]?.backId"
+                    *ngIf="details?.imagesInfo[0]?.backId.length > 0"
+                    style="cursor: pointer"
+                  >
+                    <img
+                      *ngIf="details?.imagesInfo[0]?.backId"
+                      src="{{ details?.imagesInfo[0]?.backId }}"
+                      alt=""
+                      class="img-fluid d-block"
+                    />
+                  </div>
+                </ngx-slick-carousel>
+              </div>
+          </div>
+
+          <div class="col-xl-4 col-lg-6 col-12 mx-auto">
+            <div class="tab-content border p-4">
+              
+                <div class="alert border-dashed alert-primary mb-3" role="alert">
+                  <strong>Note: </strong>Incase the customer has proceeded with a wrong Id, Provide the correct ID Number as it appears on the ID Card then submit the application
+                </div>
+                <div
+                  class="tab-pane fade show active"
+                  id="nav-speci"
+                  role="tabpanel"
+                  aria-labelledby="nav-speci-tab"
+                >
+                 <div>
+                    <form autocomplete="off" [formGroup]="idForm">
+                        <div class="modal-body">                        
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Current Id Number</label>
+                                <input type="text" readonly id="name" class="form-control" formControlName="initialId"
+                                    placeholder="" required />
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Correct Id Number</label>
+                                <input type="text" id="code" class="form-control" formControlName="correctId"
+                                    placeholder="" required />
+                            </div>
+
+                                             
+                        </div>
+                        <div class="d-flex justify-content-between gap-2 mb-3 mt-2"> 
+                            <button type="button" class="btn btn-soft-primary btn-load btn-lg" 
+                            routerLink="/app/customers/list"          
+                            >
+                              <span class="d-flex align-items-center">
+                                  <span class="flex-grow-1 me-2">
+                                      Cancel
+                                  </span>                          
+                              </span>
+                          </button>
+                          <button type="submit" class="btn btn-primary btn-load btn-lg" 
+                          [disabled]="idForm.invalid" 
+                          (click)="updateIdNumber()" 
+                            >
+                              <span class="d-flex align-items-center">
+                                  <span class="flex-grow-1 me-2">
+                                      Submit
+                                  </span>
+                                  <span class="spinner-border flex-shrink-0" role="status" *ngIf="loading">
+                                      <span class="visually-hidden">Loading...</span>
+                                  </span>
+                              </span>
+                          </button>
+                          </div>
+                    </form>
+                 </div>
+                </div>
+              </div>
+          </div>
+          <!-- end row -->
+        </div>
+        <!-- end card body -->
+      </div>
+      <!-- end card -->
+    </div>
+    <!-- end col -->
+  </div>
+  <!-- end row -->
+</div>

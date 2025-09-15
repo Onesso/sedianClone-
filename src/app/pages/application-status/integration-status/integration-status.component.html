@@ -1,0 +1,161 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="Integration Status" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card" id="applicationList">
+            <div class="card-header border border-dashed border-end-0 border-start-0">
+                <div class="row g-3">
+                    <div class="col-lg-6 col-sm-6">
+                        <div class="search-box">
+                            <input type="text" class="form-control search"
+                                placeholder="Search by National ID or Name"
+                                [(ngModel)]="searchObject">
+                            <i class="ri-search-line search-icon"></i>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-sm-4">
+                        <div>
+                            <button type="button" class="btn btn-primary w-100" (click)="getCustomerByObject()" [disabled]="!searchObject"> <i
+                                    class=" ri-search-2-line me-1 align-bottom"></i>
+                                Search
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="searchingCustomer"></span>
+                            </button>
+                        </div>
+                    </div>                          
+
+                    <div class="col-lg-3 col-12">
+                        <div>
+                         <button type="button" class="btn btn-warning w-100" (click)="exportexcel()"><i
+                            class="ri-file-excel-2-line align-bottom me-1"></i> Excel</button>
+                        </div>
+                    </div>                            
+                </div>               
+            </div>
+   
+            <div class="card-body pt-0">
+                <div class="card-body pt-0">
+                    <div class="table-responsive table-card mt-3 mb-1">
+                        <table class="table" id="customerTable">
+                            <thead>
+                                <tr class="bg-light text-muted">
+                                    <th>ID NUMBER</th>
+                                    <th>NAME</th>
+                                    <th>ACCOUNT CHECK</th>
+                                    <th>IPRS</th>
+                                    <th>KRA</th>
+                                    <th>COMPLIANCE</th>
+                                    <th>RECOGNITION</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let data of rows" id="lj_{{data?.idNo}}">    
+                                    <td>{{data.idNo}}</td>        
+                                    <td>{{data.name}}</td>                   
+                                    <td>
+                                     <div *ngIf="data.accountCheck == 'Y'">
+                                        <i class="ri-check-fill y"></i>
+                                        </div>
+                                        <div *ngIf="data.accountCheck == 'N'">
+                                        <i class="ri-close-fill x"></i>
+                                     </div>
+                                    </td>
+                                    
+                                    <td>
+                                        <div *ngIf="data.iprs== 'Y'">
+                                            <i class="ri-check-fill y"></i>
+                                           </div>
+                                           <div *ngIf="data.iprs == 'N'">
+                                            <i class="ri-close-fill x"></i>
+                                        </div>
+                                       </td>
+                                    <td>
+                                        <div *ngIf="data.kra == 'Y'">
+                                            <i class="ri-check-fill y"></i>
+                                        </div>
+                                        <div *ngIf="data.kra == 'N'">
+                                            <i class="ri-close-fill x"></i>
+                                         </div>
+                                    </td>
+                                    <td>
+                                        <div *ngIf="data.compliance == 'Y'">
+                                            <i class="ri-check-fill y"></i>
+                                        </div>
+                                        <div *ngIf="data.compliance == 'N'">
+                                            <i class="ri-close-fill x"></i>
+                                         </div>
+                                    </td>
+                                    <td>
+                                        <div *ngIf="data.recognition == 'Y'">
+                                            <i class="ri-check-fill y"></i>
+                                        </div>
+                                        <div *ngIf="data.recognition == 'N'">
+                                            <i class="ri-close-fill x"></i>
+                                         </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                     </div>
+                     <div class="row justify-content-md-between align-items-md-center">
+                        <div class="col col-sm-6">
+                            <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">
+                                Showing
+                                {{this.startIndex}} to
+                                {{this.endIndex}} of {{this.totalRecords}}
+                                entries
+                            </div>
+                        </div>
+
+                        <!-- Pagination -->
+                        <div class="col col-sm-6">
+                            <div class="text-sm-right float-sm-end listjs-pagination">
+                                <ngb-pagination [collectionSize]="this.totalRecords" [(page)]="this.currentPage"
+                                    [pageSize]="this.pageSize" (pageChange)="onPageChange($event)">
+                                </ngb-pagination>
+                            </div>
+                        </div>
+
+                        <div *ngIf="this.rows.length === 0 && !loading" class="table-responsive table-card mb-1">
+                            <div class="noresult" >
+                                <div class="text-center">
+                                    <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop"
+                                        colors="primary:#405189,secondary:#0ab39c" style="width:75px;height:75px">
+                                    </lord-icon>
+                                    <h5 class="mt-2">Sorry! No Records Found</h5>
+                                    <p class="text-muted">We've searched more than 150+ result We did not find results for you
+                                        search.</p>
+                                </div>
+                            </div>
+                            <div></div>
+                        </div>  
+
+                        <div id="elmLoader">
+                            <div class="spinner-border text-primary avatar-sm" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+              
+
+                    <!-- Tab Pane -->
+                    <div *ngIf="!rows" class="table-responsive table-card mb-1">
+                        <div class="noresult" >
+                            <div class="text-center">
+                                <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop"
+                                    colors="primary:#405189,secondary:#0ab39c" style="width:75px;height:75px">
+                                </lord-icon>
+                                <h5 class="mt-2">Sorry! No Records Found</h5>
+                                <p class="text-muted">We've searched more than 150+ result We did not find branches for you
+                                    search.</p>
+                            </div>
+                        </div>
+                        <div></div>
+                    </div>                   
+                </div>
+            </div>
+        </div>
+
+    </div>

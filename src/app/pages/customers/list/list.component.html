@@ -1,0 +1,459 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs
+  title="Customer List"
+  [breadcrumbItems]="breadCrumbItems"
+></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card" id="ticketsList">
+      <div class="card-header border border-dashed border-end-0 border-start-0">
+        <div class="row g-3">
+          <div class="col-lg-3 col-sm-6">
+            <div class="search-box">
+              <input
+                type="text"
+                class="form-control search"
+                placeholder="Search by Customer ID No."
+                [(ngModel)]="searchObject"
+              />
+              <i class="ri-search-line search-icon"></i>
+            </div>
+          </div>
+
+          <!--Start date-->
+          <div class="col-lg-1 col-sm-4">
+            <div>
+              <button
+                type="button"
+                class="btn btn-primary w-100"
+                (click)="getCustomerById()"
+                [disabled]="searchObject === ''"
+              >
+                <i class="ri-search-2-line me-1 align-bottom"></i>
+                <span
+                  class="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                  *ngIf="searchingById"
+                ></span>
+              </button>
+            </div>
+          </div>
+          <!--End date-->
+          <div class="col-lg-2 col-sm-6">
+            <div class="mb-3">
+              <input
+                [(ngModel)]="selectedStartDate"
+                class="form-control flatpickr-input"
+                (change)="onStartDateSelect()"
+                placeholder="Start date"
+                type="text"
+                mwlFlatpickr
+                [altInput]="true"
+                [convertModelValue]="true"
+              />
+            </div>
+          </div>
+
+          <div class="col-lg-2 col-sm-6">
+            <div class="mb-3">
+              <input
+                [(ngModel)]="selectedEndDate"
+                class="form-control flatpickr-input"
+                placeholder="End date"
+                (change)="onEndDateSelect()"
+                type="text"
+                mwlFlatpickr
+                [altInput]="true"
+                [convertModelValue]="true"
+              />
+            </div>
+          </div>
+          <div class="col-lg-1 col-sm-4">
+            <div>
+              <button
+                type="button"
+                class="btn btn-primary w-100"
+                (click)="searchCustomersByDate()"
+                [disabled]="!startDate || !endDate"
+              >
+                <i
+                  class="ri-search-2-line me-1 align-bottom"
+                  *ngIf="!searchingByDate"
+                ></i>
+                <span
+                  class="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                  *ngIf="searchingByDate"
+                ></span>
+              </button>
+            </div>
+          </div>
+
+          <div class="col-lg-1 col-sm-4">
+            <div>
+              <button
+                type="button"
+                class="btn btn-primary w-100"
+                (click)="getCustomers()"
+              >
+                <i
+                  class="ri-refresh-line me-1 align-bottom"
+                  *ngIf="!loading"
+                ></i>
+                <span
+                  class="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                  *ngIf="loading"
+                ></span>
+              </button>
+            </div>
+          </div>
+
+          <div class="col-lg-2 col-sm-6">
+            <ng-select
+              [items]="statusOptions"
+              [(ngModel)]="selectedStatus"
+              [clearable]="true"
+              placeholder="Filter by Status"
+              (change)="filterByStatus()"
+              bindLabel="label"
+              bindValue="value"
+            >
+            </ng-select>
+          </div>
+
+          <div class="col-lg-2 col-12">
+            <div>
+              <button
+                type="button"
+                class="btn btn-warning w-100"
+                (click)="exportexcel()"
+              >
+                <i class="ri-file-excel-2-line align-bottom me-1"></i> Excel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--end card-body-->
+      <div class="card-body">
+        <!-- Add a wrapper div with horizontal scroll -->
+        <div class="table-responsive-xl horizontal-scroll">
+          <!-- Add max-height and vertical scroll to table container -->
+          <div
+            class="table-responsive table-card mb-3"
+            style="max-height: 65vh; overflow-y: auto"
+          >
+            <table
+              class="table align-middle table-nowrap mb-0"
+              id="customerTable"
+            >
+              <!-- Keep thead fixed while scrolling -->
+              <thead class="text-muted table-light sticky-top">
+                <tr class="text-uppercase">
+                  <th>DATE</th>
+                  <th>BRANCH</th>
+                  <th>ID</th>
+                  <th>EMAIL</th>
+                  <th>NAME</th>
+                  <th>GENDER</th>
+                  <th>PHONE</th>
+                  <th>STATUS</th>
+                  <th>RM CODE</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody class="list form-check-all" id="ticket-list-data">
+                <tr
+                  *ngFor="let data of rows; let i = index"
+                  id="t_{{ data.idNo }}"
+                >
+                  <td class="id">
+                    <a class="fw-medium link-primary">{{
+                      data.createdDate | date : "medium"
+                    }}</a>
+                  </td>
+                  <td>
+                    {{ getBranchName(branches, data.branchCode) }}
+                  </td>
+                  <td>
+                    {{ data.idNo }}
+                  </td>
+                  <td>
+                    {{ data.email }}
+                  </td>
+                  <td>
+                    {{ data.firstName ? data.firstName : "-" }}
+                    {{ data.otherNames }} {{ data.surname }}
+                    <!-- <ngb-highlight [result]="data.client" [term]="service.searchTerm"></ngb-highlight> -->
+                  </td>
+                  <td>
+                    {{ data.gender }}
+                  </td>
+                  <td>
+                    {{ data.phone }}
+                  </td>
+
+                  <td>
+                    <span
+                      *ngIf="data.t24Status === 'SUCCESS'"
+                      class="badge badge-label bg-success"
+                      ><i class="mdi mdi-circle-medium"></i>
+                      SUCCESS
+                    </span>
+
+                    <span
+                      *ngIf="
+                        data.t24Status === null &&
+                        data.iprsStatus === 'SUCCESS' &&
+                        data.kycCompleteYN == 'Y'
+                      "
+                      class="badge badge-label bg-info"
+                      ><i class="mdi mdi-circle-medium"></i>
+                      IN EXCEPTION
+                    </span>
+
+                    <span
+                      *ngIf="
+                        data.t24Status === null &&
+                        data.iprsStatus !== 'NO DATA FOUND IN IPRS' &&
+                        data.kycCompleteYN == 'N'
+                      "
+                      class="badge badge-label bg-info"
+                      ><i class="mdi mdi-circle-medium"></i>
+                      IPRS
+                    </span>
+
+                    <span
+                      *ngIf="data.t24Status === 'PND_ACTION'"
+                      class="badge badge-label bg-secondary"
+                      ><i class="mdi mdi-circle-medium"></i>
+                      PENDING
+                    </span>
+
+                    <span
+                      *ngIf="
+                        data.t24Status === null &&
+                        data.iprsStatus === 'NO DATA FOUND IN IPRS'
+                      "
+                      class="badge badge-label bg-warning"
+                      ><i class="mdi mdi-circle-medium"></i>
+                      INVALID ID. NO.
+                    </span>
+
+                    <span
+                      *ngIf="data.t24Status === 'ERROR'"
+                      class="badge badge-label bg-danger"
+                      ><i class="mdi mdi-circle-medium"></i>
+                      T24 ERROR
+                    </span>
+
+                    <span
+                      *ngIf="data.t24Status === 'REJECTED'"
+                      class="badge badge-label bg-primary"
+                      ><i class="mdi mdi-circle-medium"></i>
+                      REJECTED
+                    </span>
+
+                    <span
+                      *ngIf="data.t24Status === 'RETRY'"
+                      class="badge badge-label bg-retry"
+                      ><i class="mdi mdi-circle-medium"></i>
+                      T24 RETRY
+                    </span>
+                  </td>
+
+                  <td>
+                    {{ data.salesCode }}
+                  </td>
+                  <!-- <td class="status"><span class="badge text-uppercase" [ngClass]=" { 'bg-danger-subtle text-danger': data.status === 'Closed', 'bg-warning-subtle text-warning': data.status === 'Inprogress', 'bg-success-subtle text-success': data.status === 'Open', 'bg-info-subtle text-info': data.status === 'New'}">{{data.status}}</span>
+                                    </td>
+                                    <td class="priority"><span class="badge text-uppercase" [ngClass]=" { 'bg-success ': data.priority === 'Low', 'bg-danger': data.priority === 'High', 'bg-warning': data.priority === 'Medium'}">{{data.priority}}</span>
+                                    </td> -->
+                  <td>
+                    <ul class="list-inline hstack gap-2 mb-0">
+                      <li
+                        class="list-inline-item"
+                        data-bs-toggle="tooltip"
+                        data-bs-trigger="hover"
+                        data-bs-placement="top"
+                        (click)="viewCustomer(data)"
+                        ngbTooltip="View"
+                      >
+                        <button
+                          class="btn btn-sm view-btn edit-item-btn"
+                          data-bs-toggle="modal"
+                          data-bs-target="#showModal"
+                        >
+                          <i class="ri-eye-fill fs-16"></i>
+                        </button>
+                      </li>
+                      <li
+                        class="list-inline-item edit"
+                        data-bs-toggle="tooltip"
+                        data-bs-trigger="hover"
+                        data-bs-placement="top"
+                        ngbTooltip="Validate KRA"
+                      >
+                        <button
+                          class="btn btn-sm validate-btn edit-item-btn"
+                          (click)="validateKraPin(data, i)"
+                          data-bs-toggle="modal"
+                          data-bs-target="#showModal"
+                        >
+                          <i
+                            class="ri-share-forward-2-fill fs-16"
+                            *ngIf="!loading || selectedIndex !== i"
+                          ></i>
+                          <span
+                            class="spinner-border spinner-border-sm"
+                            role="status"
+                            aria-hidden="true"
+                            *ngIf="loading && selectedIndex === i"
+                          ></span>
+                        </button>
+                      </li>
+                      <li
+                        *ngIf="data.kycCompleteYN == 'N'"
+                        class="list-inline-item me-0"
+                        data-bs-toggle="tooltip"
+                        data-bs-trigger="hover"
+                        data-bs-placement="top"
+                        ngbTooltip="Send reminder"
+                      >
+                        <button
+                          class="btn btn-sm remind-btn edit-item-btn"
+                          (click)="sendNotification(data.custNo, i)"
+                          data-bs-toggle="modal"
+                          data-bs-target="#showModal"
+                        >
+                          <i
+                            class="ri-send-plane-fill fs-16"
+                            *ngIf="!loading || selectedRow !== i"
+                          ></i>
+                          <span
+                            class="spinner-border spinner-border-sm"
+                            role="status"
+                            aria-hidden="true"
+                            *ngIf="loading && selectedRow === i"
+                          ></span>
+                        </button>
+                      </li>
+
+                      <li
+                        *ngIf="
+                          data.kycCompleteYN == 'Y' &&
+                          (data.iprsStatus == '' ||
+                            data.iprsStatus == 'FAILED') &&
+                          data.t24Status !== 'REJECTED' &&
+                          data.t24Status !== 'SUCCESS' &&
+                          data.t24Status !== 'ERROR'
+                        "
+                        class="list-inline-item me-0"
+                        data-bs-toggle="tooltip"
+                        data-bs-trigger="hover"
+                        data-bs-placement="top"
+                        ngbTooltip="Repush Application to IPRS"
+                      >
+                        <button
+                          class="btn btn-sm repush-btn edit-item-btn"
+                          (click)="confirmIprsRepush(data.idNo, i)"
+                          data-bs-toggle="modal"
+                          data-bs-target="#showModal"
+                        >
+                          <i
+                            class="ri-share-forward-box-fill fs-16"
+                            *ngIf="!loading || selectedRow !== i"
+                          ></i>
+                          <span
+                            class="spinner-border spinner-border-sm"
+                            role="status"
+                            aria-hidden="true"
+                            *ngIf="loading && selectedRow === i"
+                          ></span>
+                        </button>
+                      </li>
+
+                      <li
+                        *ngIf="
+                          data.t24Status === null &&
+                          data.iprsStatus === 'NO DATA FOUND IN IPRS'
+                        "
+                        class="list-inline-item me-0"
+                        data-bs-toggle="tooltip"
+                        data-bs-trigger="hover"
+                        data-bs-placement="top"
+                        ngbTooltip="Amend Wrongly Captured Id"
+                      >
+                        <button
+                          class="btn btn-sm recon-btn edit-item-btn"
+                          (click)="valiadateId(data)"
+                          data-bs-toggle="modal"
+                          data-bs-target="#showModal"
+                        >
+                          <i
+                            class="ri-edit-2-fill fs-16"
+                            *ngIf="!loading || selectedRow !== i"
+                          ></i>
+                          <span
+                            class="spinner-border spinner-border-sm"
+                            role="status"
+                            aria-hidden="true"
+                            *ngIf="loading && selectedRow === i"
+                          ></span>
+                        </button>
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="row justify-content-md-between align-items-md-center">
+          <div class="col col-sm-6">
+            <div
+              class="dataTables_info mb-2"
+              id="tickets-table_info"
+              role="status"
+              aria-live="polite"
+            >
+              Showing
+              {{ this.startIndex }} to {{ this.endIndex }} of
+              {{ this.totalRecords }}
+              entries
+            </div>
+          </div>
+          <!-- Pagination -->
+          <div class="col col-sm-6">
+            <div class="text-sm-right float-sm-end listjs-pagination">
+              <ngb-pagination
+                [collectionSize]="this.totalRecords"
+                [page]="this.currentPage"
+                [pageSize]="this.pageSize"
+                (pageChange)="onPageChange($event)"
+              >
+              </ngb-pagination>
+            </div>
+          </div>
+          <!-- End Pagination -->
+        </div>
+      </div>
+      <!--end card-body-->
+    </div>
+    <!--end card-->
+    <div id="elmLoader">
+      <div class="spinner-border text-primary avatar-sm" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  </div>
+  <!--end col-->
+</div>

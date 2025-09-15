@@ -1,0 +1,33 @@
+.view-btn{  
+    background-color: #ffca5b;
+    color: #2c3e4c;
+}
+.validate-btn{
+    background-color: #008a00;
+    color: aliceblue;
+}
+.remind-btn{
+    background-color: #ffac00;
+    color: aliceblue;
+}
+.delete-btn{  
+    background-color: #db3700;
+    color: aliceblue;
+}
+
+.ck-editor__editable_inline {
+    min-height: 200px !important;
+}
+.action-container,
+.content-container {
+  position: relative;
+
+  overflow: auto;
+  height: 300px;
+  min-height: 0;
+  padding: 16px;
+  margin: 8px 16px;
+  border-radius: 4px;
+
+  background-color: #fff;
+}

@@ -1,0 +1,182 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="Edit User" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+<div class="row">
+  <div class="col-lg-12">
+      <div class="card">
+          <div class="card-header justify-content-between align-items-center">
+            <!-- <div>
+                <h4 class="card-title mb-0">New User</h4>
+            </div> -->
+              
+              <div class="text-end ">
+                <button type="button" class="btn btn-soft-primary btn-sm" routerLink="/app/system-users/all">
+                    <i
+                        class="ri-arrow-left-fill align-bottom"></i> Back
+                </button>
+              </div>
+
+          </div><!-- end card header -->
+
+          <div class="card-body">
+            <div id="elmLoader" *ngIf="loading">
+                <div class="spinner-border text-primary avatar-sm" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+              <form *ngIf="!loading" (ngSubmit)="updateUser()" [formGroup]="userForm">              
+                  <div class="mt-4">
+                      <h5 class="fs-14 mb-3 text-muted">User Details</h5>
+                      <div class="row">
+                         <div class="col-xl-6">
+                            <div>
+                            <label for="labelInput" class="form-label">LDAP ID</label>
+                            <input type="text"  formControlName="username" class="form-control" id="labelInput">
+                            </div>
+                          </div>
+
+                          <div class="col-xl-6">
+                              <div class="mb-3">
+                                  <label for="cleave-delimiter" class="form-label">Surname</label>
+                                  <input type="text" formControlName="surname" class="form-control" id="labelInput">
+                              </div>
+                          </div><!-- end col -->
+                      </div><!-- end row -->
+
+                      <div class="row">
+                          <div class="col-xl-6">
+                              <div class="mb-3">
+                                  <label for="cleave-delimiters" class="form-label">Other Names</label>
+                                  <input type="text" formControlName="otherNames" class="form-control" id="labelInput">
+                              </div>
+                          </div><!-- end col -->
+
+                          <div class="col-xl-6">
+                              <div class="mb-3">
+                                  <label for="cleave-prefix" class="form-label">Phone Number</label>
+                                  <input type="text" formControlName="phoneNo" class="form-control" id="cleave-phone" placeholder="(xxx)xxx-xxxx" mask="(000)000-0000">
+                              </div>
+                          </div><!-- end col -->
+                      </div><!-- end row -->
+
+                      <div class="row">
+                          <div class="col-xl-6">
+                              <div class="mb-3 mb-xl-0">
+                                  <label for="cleave-phone" class="form-label">Email Address</label>
+                                  <input type="text"  formControlName="email" class="form-control" id="cleave-phone" placeholder="" >
+                              </div>
+                          </div><!-- end col -->
+
+                          <div class="col-xl-6">
+                             
+                          </div><!-- end col -->
+                      </div><!-- end row -->
+
+                                     
+                  </div>
+                  <div class="border mt-3 border-dashed"></div>
+                  <div class="mt-4">
+                    <h5 class="fs-14 mb-3 text-muted">Permissions Assignments</h5>
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="mb-3">
+                                <label for="cleave-ccard" class="form-label">Allocated Branch</label>
+                                <select formControlName="branchCode" class="form-select mb-3" aria-label="Select..">
+                                    <option selected>Select</option>
+                                    <option *ngFor="let choice of branchList" [ngValue]="choice.branchCode">{{choice.branchName}}</option>                             
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-6">
+                            <div class="mb-3">
+                                <label for="cleave-ccard" class="form-label">Head of Branch?</label>
+                                <select formControlName="branchHeadYN" class="form-select mb-3" aria-label="Select..">
+                                    <option selected>Select</option>
+                                    <option value="Y">Yes</option>
+                                    <option value="N">No</option>                                    
+                                </select>
+                            </div>
+                        </div>
+                    </div><!-- end row -->
+
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="mb-3">
+                                <label for="cleave-ccard" class="form-label">Freeze Account?</label>
+                                <select formControlName="frozenYN" class="form-select mb-3" aria-label="Select..">
+                                    <option selected>Select</option>
+                                    <option value="Y">Yes</option>
+                                    <option value="N">No</option>                                    
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-6">
+                            <div class="mb-3">
+                                <label for="cleave-ccard" class="form-label">Receive Notifications?</label>
+                                <select formControlName="sendNotifications" class="form-select mb-3" aria-label="Select..">
+                                    <option selected>Select</option>
+                                    <option value="Y">Yes</option>
+                                    <option value="N">No</option>                                    
+                                </select>
+                            </div>
+                        </div>
+                    </div><!-- end row -->
+
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="mb-3">
+                                <label for="cleave-ccard" class="form-label">Role</label>
+                                <select formControlName="roleId" class="form-select mb-3" aria-label="Select..">
+                                    <option selected>Select</option>
+                                    <option *ngFor="let choice of roleList" [ngValue]="choice.groupCode">{{choice.groupName}}</option>                                    
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-6">
+                            <div class="mb-3">
+                                <label for="cleave-ccard" class="form-label">Alert Type</label>
+                                <select formControlName="alertType" class="form-select mb-3" aria-label="Select..">
+                                    <option selected>Select</option>
+                                    <option value="IT">IT</option>
+                                    <option value="BRANCH">Branch</option>  
+                                    <option value="RISK">Risk</option>                                    
+                                </select>
+                            </div>
+                        </div>
+                    </div><!-- end row -->
+                                    
+                </div>
+                <div class="d-flex justify-content-between gap-2 mb-3 mt-2"> 
+                    <button type="button" class="btn btn-soft-primary btn-load btn-lg" 
+                    routerLink="/app/system-users/all"          
+                    >
+                      <span class="d-flex align-items-center">
+                          <span class="flex-grow-1 me-2">
+                              Cancel
+                          </span>                          
+                      </span>
+                  </button>
+                  <button type="submit" class="btn btn-primary btn-load btn-lg" [disabled]="userForm.invalid"       
+                    >
+                      <span class="d-flex align-items-center">
+                          <span class="flex-grow-1 me-2">
+                              Submit
+                          </span>
+                          <span class="spinner-border flex-shrink-0" role="status" *ngIf="loading">
+                              <span class="visually-hidden">Loading...</span>
+                          </span>
+                      </span>
+                  </button>
+                  </div>
+              </form><!-- end form -->
+          </div><!-- end card-body -->
+          
+      </div><!-- end card -->
+  </div>
+  <!-- end col -->
+</div>
+<!-- end row -->

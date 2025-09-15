@@ -1,0 +1,149 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="Compliance Exception" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card" id="ticketsList">
+                  <div class="card-header border border-dashed border-end-0 border-start-0">
+                <div class="row g-3">
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="search-box">
+                            <input type="text" class="form-control search"
+                                placeholder="Search for application ID No." [(ngModel)]="search">
+                            <i class="ri-search-line search-icon"></i>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-sm-4">
+                        <div>
+                            <button type="button" class="btn btn-primary w-100" [disabled]="this.search === ''" (click)="getComplianceById()"> <i
+                                    class=" ri-search-2-line me-1 align-bottom"></i>
+                                Search
+                            </button>
+                        </div>
+                    </div>                                       
+
+                    <div class="col-lg-3 col-12">
+                        <div>
+                         <button (click)="exportexcel()" type="button" class="btn btn-warning w-100"><i
+                            class="ri-file-download-line align-bottom me-1"></i> Excel</button>
+                        </div>
+                    </div>  
+
+                    <div class="col-lg-2 col-sm-4">
+                        <div>
+                            <button type="button" class="btn btn-primary w-100 cursor-pointer" (click)="back()"> <i
+                                    class="ri-arrow-go-back-line me-1 align-bottom"></i>
+                               Back
+                            </button>
+                        </div>
+                    </div>                             
+                </div>               
+            </div>
+            <!--end card-body-->
+            <div class="card-body">
+                <div class="table-responsive table-card mb-3">
+                    <table class="table align-middle table-nowrap mb-0" id="customerTable">
+                        <thead class="text-muted table-light">
+                            <tr class="text-uppercase">
+                                <th>DATE</th>
+                                <th>DOC. No.</th>
+                                <th>Customer Name</th>
+                                <th>Email</th>
+                                <th>Branch</th>
+                                <th>Reg. Type</th>
+                                <th>Agent CODE</th>    
+                                <th>Agent Name</th>  
+                                <th>Actions</th>                            
+                            </tr>
+                        </thead>
+                        <tbody class="list form-check-all" id="ticket-list-data">
+                            <tr *ngFor="let data of rows;" id="t_{{data.nationalId}}">
+                                <td class="id"><a  class="fw-medium link-primary">{{data.createdDate | date :'medium'}}</a></td>
+                                <td>
+                                    {{data.nationalId}}
+                                </td>
+                                <td>
+                                    {{data.customerName}}
+                                </td>
+                                <td>
+                                    {{data.customerEmail}}
+                                </td>
+                                <td>
+                                    {{data.branchCode}}
+                                </td>
+                                <td>
+                                    {{data.regType}}
+                                </td>
+                                <td>
+                                    {{data.salesAgentCode? data.salesAgentCode:'-'}}
+                                </td>
+                                <td>
+                                    {{data.salesAgentName? data.salesAgentName:"-"}}
+                                </td>
+                                
+                               
+                                <td>
+                                    <ul class="list-inline hstack gap-2 mb-0">                                      
+                                        <li class="list-inline-item" data-bs-toggle="tooltip"
+                                        data-bs-trigger="hover" data-bs-placement="top"
+                                        (click)="viewCustomer(data)"
+                                        ngbTooltip="View">
+                                        <button class="btn btn-sm view-btn edit-item-btn"
+                                            data-bs-toggle="modal" data-bs-target="#showModal"
+                                            ><i class="ri-eye-fill fs-16"></i></button>                                   
+                                        </li>                                        
+                                    </ul>
+                                </td>
+                                                      
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div *ngIf="this.rows.length === 0 && !loading" class="table-responsive table-card mb-1">
+                    <div class="noresult" >
+                        <div class="text-center">
+                            <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop"
+                                colors="primary:#405189,secondary:#0ab39c" style="width:75px;height:75px">
+                            </lord-icon>
+                            <h5 class="mt-2">Sorry! No Records Found</h5>
+                            <p class="text-muted">We've searched more than 150+ result We did not find results for you
+                                search.</p>
+                        </div>
+                    </div>
+                    <div></div>
+                </div> 
+                <div class="row justify-content-md-end align-items-md-center">
+                    <div class="col col-sm-6">
+                        <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">
+                            Showing
+                            {{this.startIndex}} to
+                            {{this.endIndex}} of {{this.totalRecords}}
+                            entries
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="col col-sm-6">
+                        <div class="text-sm-right float-sm-end listjs-pagination">
+                            <ngb-pagination [collectionSize]="this.totalRecords" [(page)]="this.currentPage"
+                                [pageSize]="this.pageSize" (pageChange)="onPageChange($event)">
+                            </ngb-pagination>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+            <!--end card-body-->
+        </div>
+        <!--end card-->
+        <div id="elmLoader" *ngIf="loading">
+            <div class="spinner-border text-primary avatar-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    </div>
+    <!--end col-->
+</div>
+<!--end row-->
+

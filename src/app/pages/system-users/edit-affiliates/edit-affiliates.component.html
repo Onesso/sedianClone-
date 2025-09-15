@@ -1,0 +1,138 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="Edit User" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+<div class="row">
+  <div class="col-lg-12">
+      <div class="card">
+          <div class="card-header justify-content-between align-items-center">
+            <!-- <div>
+                <h4 class="card-title mb-0">New User</h4>
+            </div> -->
+              
+              <div class="text-end ">
+                <button type="button" class="btn btn-soft-primary btn-sm" routerLink="/app/system-users/affiliates">
+                    <i
+                        class="ri-arrow-left-fill align-bottom"></i> Back
+                </button>
+              </div>
+
+          </div><!-- end card header -->
+
+          <div class="card-body">
+            <div id="elmLoader" *ngIf="loading">
+                <div class="spinner-border text-primary avatar-sm" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+              <form *ngIf="!loading" (ngSubmit)="updateAffiliate()" [formGroup]="userForm">              
+                <div class="mt-4">                    
+                    <div class="row">
+                      <div class="col-xl-6">
+                          <div class="mb-3">
+                              <label for="cleave-delimiter" class="form-label">First Name</label>
+                              <input type="text" formControlName="firstName" class="form-control" id="labelInput">
+                          </div>
+                      </div><!-- end col -->
+                       <div class="col-xl-6">
+                          <div>
+                          <label for="labelInput" class="form-label">Last Name</label>
+                          <input type="text"  formControlName="lastName" class="form-control" id="labelInput">
+                          </div>
+                        </div>                        
+                    </div><!-- end row -->                                
+                </div>
+
+                <div class="mt-4">                    
+                  <div class="row">
+                    <div class="col-xl-6">
+                        <div class="mb-3">
+                            <label for="cleave-delimiter" class="form-label">Email</label>
+                            <input type="text" formControlName="email" class="form-control" id="labelInput">
+                        </div>
+                    </div><!-- end col -->
+                     <div class="col-xl-6">
+                        <div>
+                        <label for="labelInput" class="form-label">Phone</label>
+                        <input type="tel"  formControlName="phone" class="form-control" id="labelInput">
+                        </div>
+                      </div>                        
+                  </div><!-- end row -->                                
+                </div>
+
+                <div class="mt-4">                    
+                  <div class="row">
+                    <div class="col-xl-6">
+                        <div class="mb-3">
+                            <label for="cleave-delimiter" class="form-label">Alias</label>
+                            <input type="text" formControlName="alias" class="form-control" id="labelInput">
+                        </div>
+                    </div><!-- end col -->
+                     <div class="col-xl-6">
+                        <div>
+                        <label for="labelInput" class="form-label">Url Link</label>
+                        <input type="text"  formControlName="urlLink" class="form-control" id="labelInput">
+                        </div>
+                      </div>                        
+                  </div><!-- end row -->                                
+                </div>
+
+                <div class="row">                  
+
+                  <div class="col-xl-6">
+                      <div class="mb-3 mt-4">
+                          <label for="cleave-ccard" class="form-label">Business Model</label>
+                          <select formControlName="businessModel" class="form-select mb-3" aria-label="Select..">
+                              <option selected>Select</option>
+                              <option value="Marketing">Marketing</option>
+                              <option value="Content Creation">Content Creation</option>  
+                              <option value="Networking">Networking</option>
+                              <option value="Promotions">Promotions</option>                                  
+                          </select>
+                      </div>
+                  </div>
+                  <div class="col-xl-6">
+                      <div class="mb-3 mt-4">
+                          <label for="cleave-ccard" class="form-label">Platforms</label>
+                          <select formControlName="platform" class="form-select mb-3" aria-label="Select..">
+                              <option selected>Select</option>
+                              <option value="Facebook">Facebook</option>
+                              <option value="Instagram">Instagram</option>  
+                              <option value="X">X</option>     
+                              <option value="Mail">Mail</option>                             
+                          </select>
+                      </div>
+                  </div>
+                </div><!-- end row -->
+                                    
+                
+                <div class="d-flex justify-content-between gap-2 mb-3 mt-2"> 
+                    <button type="button" class="btn btn-soft-primary btn-load btn-lg" 
+                    routerLink="/app/system-users/affiliates"          
+                    >
+                      <span class="d-flex align-items-center">
+                          <span class="flex-grow-1 me-2">
+                              Cancel
+                          </span>                          
+                      </span>
+                  </button>
+                  <button type="submit" class="btn btn-primary btn-load btn-lg" [disabled]="userForm.invalid"       
+                    >
+                      <span class="d-flex align-items-center">
+                          <span class="flex-grow-1 me-2">
+                              Submit
+                          </span>
+                          <span class="spinner-border flex-shrink-0" role="status" *ngIf="loading">
+                              <span class="visually-hidden">Loading...</span>
+                          </span>
+                      </span>
+                  </button>
+                  </div>
+              </form><!-- end form -->
+          </div><!-- end card-body -->
+          
+      </div><!-- end card -->
+  </div>
+  <!-- end col -->
+</div>
+<!-- end row -->

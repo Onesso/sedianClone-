@@ -1,0 +1,98 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="Account Details" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+<div class="card">
+    <div class="d-flex justify-content-center align-items-center" *ngIf="loading">
+        <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <div class="card-body" *ngFor="let cust of this.data">
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="sticky-side-div">
+                    <div class="card ribbon-box border shadow-none right">
+                        <!-- <div class="ribbon-two ribbon-two-info"><span><i class="ri-fire-fill align-bottom"></i> ID</span></div> -->
+                        <img [src]="cust?.photoImage" alt="Selfie" class="img-fluid rounded" height="200" width="450">
+                       
+                    </div>
+                    <!-- <div class="hstack gap-2">
+                        <button class="btn btn-primary w-100">Place Bid</button>
+                    </div> -->
+                </div>
+            </div><!--end col-->
+            <div class="col-lg-8">
+              
+                <div>          
+                    <div class="dropdown float-end" >
+                        <button class="btn btn-primary dropdown arrow-none" (click)="back()" type="button">
+                            <i class="ri-arrow-go-back-fill gap-4 align-middle fs-16"></i>Back
+                        </button>                       
+                    </div>
+                    <h4>Customer Details</h4>     
+
+                    <div class="product-content mt-5">
+                        <!-- <h5 class="fs-14 mb-3">Product Description :</h5> -->
+                        <nav>
+                            <ul ngbNav #nav="ngbNav" [activeId]="1" class="nav nav-tabs nav-tabs-custom nav-primary">
+                                <li [ngbNavItem]="1">                                  
+                                    <ng-template ngbNavContent>
+                                        <div class="tab-pane fade show active" id="nav-speci" role="tabpanel" aria-labelledby="nav-speci-tab">
+                                            <div class="table-responsive">
+                                                <table class="table align-middle table-nowrap mb-0">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th scope="row">
+                                                                <div class="d-flex align-items-center">                                                                 
+                                                                    <a class="text-body"><span class="mb-0 ms-2">Account Title</span></a>
+                                                                </div>
+                                                            </th>
+                                                            <td>{{ cust.accountTitle }}</td>                                                           
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">
+                                                                <div class="d-flex align-items-center">                                                                   
+                                                                    <a class="text-body"><span class="mb-0 ms-2">Customer Name</span></a>
+                                                                </div>
+                                                            </th>
+                                                            <td>{{ cust.customerName }}</td>                                                            
+                                                          
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">
+                                                                <div class="d-flex align-items-center">                                                                    
+                                                                    <a class="text-body"><span class="mb-0 ms-2">ID Number</span></a>
+                                                                </div>
+                                                            </th>
+                                                            <td>{{ cust?.nationalId }}</td>
+                                                            
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">
+                                                                <div class="d-flex align-items-center">                                                                   
+                                                                    <a  class="text-body"><span class="mb-0 ms-2">Registration Document</span></a>
+                                                                </div>
+                                                            </th>
+                                                            <td>{{ cust?.idType }}</td>
+                                                            
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </li>                               
+                              </ul>
+                        </nav>
+                        <div class="tab-content border border-top-0 p-4" id="nav-tabContent">
+                            <div [ngbNavOutlet]="nav"></div>
+                        </div>
+                    </div>                 
+                </div>
+            </div>
+            <!--end col-->
+        </div>
+        <!--end row-->
+    </div>
+</div><!--end card-->

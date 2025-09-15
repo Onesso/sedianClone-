@@ -1,0 +1,567 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs
+  title="Customer Details"
+  [breadcrumbItems]="breadCrumbItems"
+></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+<div id="elmLoader">
+  <div class="spinner-border text-primary avatar-sm" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+<div
+  class="row"
+  *ngIf="!loading"
+  [photoGalleryGroup]="{ arrowEl: true, indexIndicatorSep: ' - ' }"
+>
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row gx-lg-5">
+          <div
+            class="zoomed-image"
+            *ngIf="zoomedImageUrl"
+            (click)="closeZoomed()"
+          >
+            <img [src]="zoomedImageUrl" />
+          </div>
+          <div class="col-xl-4 col-md-8 mx-auto">
+            <div class="product-img-slider sticky-side-div">
+              <ngx-slick-carousel
+                reconcile-id
+                [config]="config"
+                class="carousel"
+                #slickModal="slick-carousel"
+                (afterChange)="slickChange($event)"
+              >
+                <div
+                  class="swiper-slide"
+                  ngxSlickItem
+                  *ngIf="
+                    details?.imagesInfo[0]?.selfieImage == null && !loading
+                  "
+                >
+                  <img
+                    src="assets/images/profile-ph.png"
+                    alt=""
+                    class="img-fluid d-block"
+                  />
+                </div>
+                <div
+                  class="swiper-slide rounded"
+                  [photoGallery]="details?.imagesInfo[0]?.selfieImage"
+                  *ngIf="details?.imagesInfo[0]?.selfieImage.length > 0"
+                  style="cursor: pointer"
+                >
+                  <img
+                    *ngIf="details?.imagesInfo[0]?.selfieImage"
+                    src="{{ details?.imagesInfo[0]?.selfieImage }}"
+                    alt=""
+                    class="img-fluid d-block"
+                  />
+                </div>
+              </ngx-slick-carousel>
+
+              <div>
+                <ul class="list-unstyled mb-0">
+                  <li class="py-2">
+                    <div class="border border-dashed rounded p-3">
+                      <div class="d-flex align-items-start mb-3">
+                        <div class="hstack gap-3">
+                          <div class="flex-grow-1">
+                            <p class="text-muted mb-0">Images</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="d-flex flex-grow-1 gap-2 mb-3">
+                        <div>
+                          <div class="image-gallery">
+                            <div
+                              class="image-container d-block"
+                              [photoGallery]="details?.imagesInfo[0]?.frontId"
+                            >
+                              <img
+                                class="avatar-sm rounded object-fit-cover"
+                                [src]="details?.imagesInfo[0]?.frontId"
+                              />
+                            </div>
+                          </div>
+                          <h5 class="fs-14 mb-0">ID Front</h5>
+                        </div>
+                        <div>
+                          <div class="image-gallery">
+                            <div
+                              class="image-container d-block"
+                              [photoGallery]="details?.imagesInfo[0]?.backId"
+                            >
+                              <img
+                                class="avatar-sm rounded object-fit-cover"
+                                [src]="details?.imagesInfo[0]?.backId"
+                              />
+                            </div>
+                          </div>
+                          <h5 class="fs-14 mb-0">ID Back</h5>
+                        </div>
+                        <div>
+                          <div class="image-gallery">
+                            <div
+                              class="image-container d-block"
+                              [photoGallery]="
+                                details?.imagesInfo[0]?.signatuerLink
+                              "
+                            >
+                              <img
+                                class="avatar-sm rounded object-fit-cover"
+                                [src]="details?.imagesInfo[0]?.signatuerLink"
+                              />
+                            </div>
+                          </div>
+                          <h5 class="fs-14 mb-0">Signature</h5>
+                        </div>
+                        <div>
+                          <div
+                            *ngIf="
+                              details?.imagesInfo[0]?.iprsImage != null ||
+                              details?.imagesInfo[0]?.iprsImage?.length > 0
+                            "
+                            class="image-gallery"
+                          >
+                            <div
+                              class="image-container d-block"
+                              [photoGallery]="details?.imagesInfo[0]?.iprsImage"
+                            >
+                              <img
+                                class="avatar-sm rounded object-fit-cover"
+                                [src]="details?.imagesInfo[0]?.iprsImage"
+                              />
+                            </div>
+                          </div>
+                          <div
+                            class="image-container d-block"
+                            *ngIf="
+                              details?.imagesInfo[0]?.iprsImage == null ||
+                              details?.imagesInfo[0]?.iprsImage?.length == 0
+                            "
+                          >
+                            <img
+                              src="assets/images/noImage.png"
+                              alt=""
+                              class="avatar-sm rounded object-fit-cover"
+                            />
+                          </div>
+                          <h5 class="fs-14 mb-0">IPRS</h5>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- <div id="elmLoader">
+                            <div class="spinner-border text-primary avatar-sm" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div> -->
+          </div>
+          <!-- end col -->
+
+          <div class="col-xl-8 big-side">
+            <div class="mt-xl-0 mt-5">
+              <div class="d-flex">
+                <div class="flex-grow-1">
+                  <h4>{{ details?.personalInfo[0]?.name }}</h4>
+                  <div class="hstack gap-3 flex-wrap">
+                    <div class="text-muted">
+                      ID Number :
+                      <span class="text-body fw-medium">
+                        {{ details?.personalInfo[0]?.idNo }}</span
+                      >
+                    </div>
+                    <div class="vr"></div>
+                    <div class="text-muted">
+                      Phone :
+                      <span class="text-body fw-medium">{{
+                        details?.personalInfo[0]?.phone
+                      }}</span>
+                    </div>
+                    <div class="vr"></div>
+                    <div class="text-muted">
+                      Email :
+                      <span class="text-body fw-medium">
+                        {{ details?.personalInfo[0]?.email }}</span
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="flex-shrink-0">
+                  <div>
+                    <button
+                      type="button"
+                      class="btn btn-soft-primary btn-sm"
+                      (click)="navigateBack()"
+                    >
+                      <i class="ri-arrow-left-fill align-bottom"></i> Back
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- <div class="d-flex flex-wrap gap-2 align-items-center mt-3">
+                                <div class="text-muted fs-16">
+                                    <ngb-rating [rate]="this.content?.rating" class="mdi mdi-star text-warning" [max]=4>
+                                    </ngb-rating>
+                                </div>
+                                <div class="text-muted">KYC Complete</div>
+                                <div class="text-muted">
+                                </div>
+                            </div> -->
+
+              <div class="row">
+                <div class="product-content mt-5">
+                  <h5 class="fs-14 mb-3">KYC Details:</h5>
+                  <!-- Tab panes -->
+                  <div class="tab-content border border-top-1 p-4">
+                    <a class="fw-medium"> Preference Details </a>
+
+                    <div
+                      class="tab-pane fade show active"
+                      id="nav-speci"
+                      role="tabpanel"
+                      aria-labelledby="nav-speci-tab"
+                    >
+                      <div class="table-responsive">
+                        <table class="table mb-0">
+                          <tbody>
+                            <tr>
+                              <th scope="row" style="width: 200px">Branch</th>
+                              <td>
+                                {{ details?.preference[0]?.branchDescription }}
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Country of Residence</th>
+                              <td>
+                                {{
+                                  details?.preference[0]?.residenceCountryName
+                                }}
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Physical Address</th>
+                              <td>
+                                {{ details?.preference[0]?.physicalAddress }}
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Tab panes -->
+                  <div class="tab-content border border-top-0 p-4">
+                    <a class="fw-medium" data-bs-toggle="tab" role="tab">
+                      Occupation Details
+                    </a>
+
+                    <div
+                      class="tab-pane fade show active"
+                      id="nav-speci"
+                      role="tabpanel"
+                      aria-labelledby="nav-speci-tab"
+                    >
+                      <div class="table-responsive">
+                        <table class="table mb-0">
+                          <tbody>
+                            <tr>
+                              <th scope="row" style="width: 200px">Currency</th>
+                              <td>
+                                {{
+                                  details?.occupationInfo[0]?.currency
+                                    ? details?.occupationInfo[0]?.currency
+                                    : "KES"
+                                }}
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">OCcupation</th>
+                              <td>
+                                {{
+                                  details?.occupationInfo[0]
+                                    ?.occupationDescription
+                                }}
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Industry</th>
+                              <td>
+                                {{
+                                  details?.occupationInfo[0]
+                                    ?.industryDescription
+                                }}
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Salary Range</th>
+                              <td>
+                                {{ details?.occupationInfo[0]?.salaryRange }}
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Employer Name</th>
+                              <td>
+                                {{ details?.occupationInfo[0]?.employerName }}
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Tab panes -->
+                  <div class="tab-content border border-top-0 p-4">
+                    <a class="fw-medium" data-bs-toggle="tab" role="tab">
+                      Exception Info
+                    </a>
+                    <div
+                      class="tab-pane fade show active"
+                      id="nav-speci"
+                      role="tabpanel"
+                      aria-labelledby="nav-speci-tab"
+                    >
+                      <div class="table-responsive">
+                        <table class="table mb-0">
+                          <tbody>
+                            <tr>
+                              <th scope="row" style="width: 200px">
+                                Description
+                              </th>
+                              <td>
+                                {{ details?.exceptionInfo[0]?.description }}
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Date Created</th>
+                              <td>
+                                {{ details?.exceptionInfo[0]?.createdDate }}
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Accepted/Rejected</th>
+                              <td>
+                                {{
+                                  details?.exceptionInfo[0]?.approvedRejected
+                                }}
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Accepeted/Rejected Date</th>
+                              <td>
+                                {{
+                                  details?.exceptionInfo[0]
+                                    ?.approvalrejectedDate
+                                }}
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Exception Dequeue</th>
+                              <td>
+                                {{
+                                  details?.exceptionInfo[0]?.exceptionDequeue
+                                }}
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Approved/Rejected By</th>
+                              <td>{{ details?.OtherInfo[0]?.dada }}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Tab panes -->
+                  <div class="tab-content border border-top-0 p-4">
+                    <a class="fw-medium" data-bs-toggle="tab" role="tab">
+                      Other Info
+                    </a>
+                    <div
+                      class="tab-pane fade show active"
+                      id="nav-speci"
+                      role="tabpanel"
+                      aria-labelledby="nav-speci-tab"
+                    >
+                      <div class="table-responsive">
+                        <table class="table mb-0">
+                          <tbody>
+                            <tr>
+                              <th scope="row" style="width: 200px">
+                                Fatca Y/N
+                              </th>
+                              <td>{{ details?.OtherInfo[0]?.fatcaYN }}</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">AML Flag</th>
+                              <td>{{ details?.OtherInfo[0]?.amlFlag }}</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">SMS Code Confirmed</th>
+                              <td>
+                                {{ details?.OtherInfo[0]?.smsCodeConfirmYN }}
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">KYC Complete</th>
+                              <td>
+                                {{ details?.OtherInfo[0]?.kycCompleteYn }}
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Account Bundle</th>
+                              <td>
+                                {{ details?.OtherInfo[0]?.accountBundle }}
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Debit Card Ordered</th>
+                              <td>
+                                {{ details?.OtherInfo[0]?.orderDebitCard }}
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">IPRS Percentage Match</th>
+                              <td>
+                                <strong
+                                  >{{
+                                    details?.personalInfo[0]?.percentagematch
+                                      ? details?.personalInfo[0]
+                                          ?.percentagematch
+                                      : "-"
+                                  }}%</strong
+                                >
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Tab panes -->
+                  <div class="tab-content border border-top-1 p-4">
+                    <a class="fw-medium"> Account Details </a>
+                    <div
+                      class="tab-pane fade show active"
+                      aria-labelledby="nav-speci-tab"
+                    >
+                      <div class="table-responsive">
+                        <table class="table mb-0">
+                          <tbody>
+                            <tr>
+                              <th scope="row" style="width: 200px">
+                                Account Type
+                              </th>
+                              <td>
+                                {{
+                                  details?.accountsInfo[0]?.accType
+                                    ? details?.accountsInfo[0]?.accType
+                                    : "-"
+                                }}
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Date Created</th>
+                              <td>
+                                {{ details?.accountsInfo[0]?.createdDate }}
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Close Flag</th>
+                              <td>{{ details?.accountsInfo[0]?.closeYn }}</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">In Exception</th>
+                              <td>
+                                {{ details?.accountsInfo[0]?.accinException }}
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">T24 Status</th>
+                              <td>{{ details?.accountsInfo[0]?.t24Status }}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Tab panes -->
+                  <div
+                    class="tab-content border border-top-1 p-4"
+                    *ngIf="this.exceptionData.length > 0"
+                  >
+                    <a class="fw-medium"> PENDING EXCEPTIONS </a>
+                    <div
+                      class="tab-pane fade show active"
+                      aria-labelledby="nav-speci-tab"
+                    >
+                      <div
+                        class="alert border-dashed alert-primary"
+                        role="alert"
+                      >
+                        <div
+                          class="d-flex align-items-center"
+                          *ngFor="let excep of this.exceptionData"
+                        >
+                          <lord-icon
+                            src="https://cdn.lordicon.com/nkmsrxys.json"
+                            trigger="loop"
+                            colors="primary:#121331,secondary:#8c68cd"
+                            style="width: 80px; height: 80px"
+                          >
+                          </lord-icon>
+                          <div class="ms-2 border-bottom-dashed">
+                            <!-- <h5 class="fs-14 text-primary fw-semibold">Exceptions</h5> -->
+
+                            <p class="text-body mb-1">
+                              About Exception:
+                              <span class="fw-semibold">
+                                {{ excep?.description ?? "-" }}</span
+                              ><br />
+                            </p>
+
+                            <p class="text-body mb-1">
+                              Approved/Rejected:
+                              <span class="fw-semibold">
+                                {{ excep?.approvedRejected ?? "-" }}</span
+                              ><br />
+                            </p>
+
+                            <p class="text-body mb-1">
+                              Approved/Rejected By:
+                              <span class="fw-semibold">
+                                {{ excep?.approvedRejectedBy ?? "-" }}</span
+                              ><br />
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end col -->
+          </div>
+          <!-- end row -->
+        </div>
+        <!-- end card body -->
+      </div>
+      <!-- end card -->
+    </div>
+    <!-- end col -->
+  </div>
+  <!-- end row -->
+</div>

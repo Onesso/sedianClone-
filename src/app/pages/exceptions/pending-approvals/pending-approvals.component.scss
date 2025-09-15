@@ -1,0 +1,20 @@
+.view-btn{  
+    background-color: #ffeb3b;
+    color: #2c3e4c;
+}
+
+.browse:hover{
+    scale: (1.1);
+}
+
+.btn-personal {   
+    color: #fff;
+    background-color: #026c9c;
+    animation: gradual-border 1s 1 ease-in-out;
+}
+
+.btn-gradual {
+    animation: gradual-color 1s 1 ease-in-out;
+   border-color:#026c9c;
+    color:#026c9c;
+}
