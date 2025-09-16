@@ -1,1 +1,223 @@
-<p>drop-off works!</p>
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs
+  title="Drop-off report"
+  [breadcrumbItems]="breadCrumbItems"
+></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card" id="ticketsList">
+      <div class="card-header border border-dashed border-end-0 border-start-0">
+        <div class="row g-3">
+          <div class="col-lg-2 col-md-4 col-sm-6">
+            <div class="search-box">
+              <input
+                type="text"
+                class="form-control search"
+                placeholder="Search by Customer ID No."
+                [(ngModel)]="searchObject"
+              />
+              <i class="ri-search-line search-icon"></i>
+            </div>
+          </div>
+
+          <!--Start date-->
+          <div class="col-lg-1 col-md-2 col-sm-4">
+            <div>
+              <button
+                type="button"
+                class="btn btn-primary w-100"
+                (click)="getCustomerById()"
+                [disabled]="searchObject === ''"
+              >
+                <i class="ri-search-2-line me-1 align-bottom"></i>
+                <span
+                  class="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                  *ngIf="searchingById"
+                ></span>
+              </button>
+            </div>
+          </div>
+          <!--End date-->
+          <div class="col-lg-2 col-md-4 col-sm-6">
+            <div class="mb-3">
+              <input
+                [(ngModel)]="selectedStartDate"
+                class="form-control flatpickr-input"
+                (change)="onStartDateSelect()"
+                placeholder="Start date"
+                type="text"
+                mwlFlatpickr
+                [altInput]="true"
+                [convertModelValue]="true"
+              />
+            </div>
+          </div>
+
+          <div class="col-lg-2 col-md-4 col-sm-6">
+            <div class="mb-3">
+              <input
+                [(ngModel)]="selectedEndDate"
+                class="form-control flatpickr-input"
+                placeholder="End date"
+                (change)="onEndDateSelect()"
+                type="text"
+                mwlFlatpickr
+                [altInput]="true"
+                [convertModelValue]="true"
+              />
+            </div>
+          </div>
+
+          <div class="col-lg-1 col-md-2 col-sm-4">
+            <div>
+              <button
+                type="button"
+                class="btn btn-primary w-100"
+                (click)="searchCustomersByDate()"
+                [disabled]="!startDate || !endDate"
+              >
+                <i
+                  class="ri-search-2-line me-1 align-bottom"
+                  *ngIf="!searchingByDate"
+                ></i>
+                <span
+                  class="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                  *ngIf="searchingByDate"
+                ></span>
+              </button>
+            </div>
+          </div>
+
+          <div class="col-lg-1 col-md-2 col-sm-4">
+            <div>
+              <button
+                type="button"
+                class="btn btn-primary w-100 d-flex align-items-center justify-content-center"
+                (click)="getCustomers()"
+              >
+                <i
+                  class="ri-refresh-line me-1 align-bottom"
+                  *ngIf="!loading"
+                ></i>
+                <span>Reload</span>
+                <span
+                  class="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                  *ngIf="loading"
+                ></span>
+              </button>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-2 col-sm-4">
+            <div>
+              <button
+                type="button"
+                class="btn btn-warning w-100"
+                (click)="exportexcel()"
+              >
+                <i class="ri-file-excel-2-line align-bottom me-1"></i> Excel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--end card-body-->
+      <div class="card-body">
+        <!-- Add a wrapper div with horizontal scroll -->
+        <div class="table-responsive-xl horizontal-scroll">
+          <!-- Add max-height and vertical scroll to table container -->
+          <div
+            class="table-responsive table-card mb-3"
+            style="max-height: 65vh; overflow-y: auto"
+          >
+            <table
+              class="table align-middle table-nowrap mb-0"
+              id="customerTable"
+            >
+              <!-- Keep thead fixed while scrolling -->
+              <thead class="text-muted table-light sticky-top">
+                <tr class="text-uppercase">
+                  <th>DATE</th>
+                  <th>BRANCH</th>
+                  <th>ID</th>
+                  <th>EMAIL</th>
+                  <th>NAME</th>
+                  <th>GENDER</th>
+                  <th>PHONE</th>
+                  <th>STATUS</th>
+                  <th>RM CODE</th>
+                </tr>
+              </thead>
+
+              <tbody class="list form-check-all" id="ticket-list-data">
+                <tr
+                  *ngFor="let data of rows; let i = index"
+                  id="t_{{ data.idNo }}"
+                >
+                  <td class="id">
+                    <a class="fw-medium link-primary"></a>
+                  </td>
+
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="row justify-content-md-between align-items-md-center">
+          <div class="col col-sm-6">
+            <div
+              class="dataTables_info mb-2"
+              id="tickets-table_info"
+              role="status"
+              aria-live="polite"
+            >
+              Showing
+              {{ this.startIndex }} to {{ this.endIndex }} of
+              {{ this.totalRecords }}
+              entries
+            </div>
+          </div>
+          <!-- Pagination -->
+          <div class="col col-sm-6">
+            <div class="text-sm-right float-sm-end listjs-pagination">
+              <ngb-pagination
+                [collectionSize]="this.totalRecords"
+                [page]="this.currentPage"
+                [pageSize]="this.pageSize"
+                (pageChange)="onPageChange($event)"
+              >
+              </ngb-pagination>
+            </div>
+          </div>
+          <!-- End Pagination -->
+        </div>
+      </div>
+      <!--end card-body-->
+    </div>
+    <!--end card-->
+    <div id="elmLoader">
+      <div class="spinner-border text-primary avatar-sm" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  </div>
+  <!--end col-->
+</div>

@@ -1,0 +1,93 @@
+.view-btn {
+  background-color: #ffca5b;
+  color: #2c3e4c;
+}
+.validate-btn {
+  background-color: #008a00;
+  color: aliceblue;
+}
+.remind-btn {
+  background-color: #ffac00;
+  color: aliceblue;
+}
+
+.repush-btn {
+  background-color: #026c9c;
+  color: aliceblue;
+}
+
+.recon-btn {
+  background-color: #f9e200;
+  color: #392030;
+}
+
+.bg-retry {
+  background-color: #026c9c;
+  color: aliceblue;
+}
+
+.horizontal-scroll {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.sticky-top {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: #f8f9fa; /* Match your theme's header background */
+}
+
+/* Add some minimal width to table cells for better readability */
+.table th,
+.table td {
+  min-width: 120px; /* Adjust based on your content */
+}
+
+/* Keep action column buttons together */
+.table th:last-child,
+.table td:last-child {
+  min-width: 150px;
+  position: sticky;
+  right: 0;
+  background-color: #fff; /* Match your table background */
+}
+
+/* Add shadow to indicate more content */
+.horizontal-scroll::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 5px;
+  background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.1));
+  pointer-events: none;
+}
+
+/* ng-select custom styles */
+::ng-deep .ng-select {
+  .ng-select-container {
+    min-height: 36px;
+    border-radius: 4px;
+  }
+
+  &.ng-select-single .ng-select-container {
+    height: 36px;
+  }
+
+  .ng-dropdown-panel {
+    border: 1px solid #ced4da;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .ng-option {
+    padding: 8px 12px;
+    &.ng-option-selected {
+      background-color: #e9ecef;
+    }
+    &:hover {
+      background-color: #f8f9fa;
+    }
+  }
+}
