@@ -9,7 +9,7 @@ import {
   Validators,
 } from "@angular/forms";
 import * as XLSX from "xlsx";
-
+import { Dropoff, DROPOFF_DATA } from "./drop-off-data";
 // Date Format
 import { DatePipe } from "@angular/common";
 
@@ -52,8 +52,9 @@ export class DropOffComponent implements OnInit {
   content?: any;
   lists?: any;
   econtent?: any;
+  rows: Dropoff[] = [];
 
-  rows: any[] = [];
+  // rows: any[] = [];
   originalRows: any[] = [];
   searchObject: string = "";
   startDate: string = "";
@@ -122,6 +123,9 @@ export class DropOffComponent implements OnInit {
       { label: "Reports" },
       { label: "Drop-off", active: true },
     ];
+
+    //load dummy data
+    this.rows = DROPOFF_DATA;
 
     // Check for navigation from details page
     this.isNavigatingBack =

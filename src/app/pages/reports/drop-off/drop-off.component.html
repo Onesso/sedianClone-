@@ -135,26 +135,24 @@
         <!-- Add a wrapper div with horizontal scroll -->
         <div class="table-responsive-xl horizontal-scroll">
           <!-- Add max-height and vertical scroll to table container -->
-          <div
+          <!-- <div
             class="table-responsive table-card mb-3"
             style="max-height: 65vh; overflow-y: auto"
-          >
-            <table
-              class="table align-middle table-nowrap mb-0"
-              id="customerTable"
-            >
+          > -->
+          <div class="table-responsive table-card mt-3 mb-1 w-100">
+            <table class="table" id="customerTable">
               <!-- Keep thead fixed while scrolling -->
-              <thead class="text-muted table-light sticky-top">
-                <tr class="text-uppercase">
-                  <th>DATE</th>
-                  <th>BRANCH</th>
-                  <th>ID</th>
-                  <th>EMAIL</th>
-                  <th>NAME</th>
-                  <th>GENDER</th>
-                  <th>PHONE</th>
-                  <th>STATUS</th>
-                  <th>RM CODE</th>
+              <thead class="text-muted w-100">
+                <tr class="text-uppercase bg-light w-100">
+                  <th>Customer ID</th>
+                  <th>Customer Name</th>
+                  <th>Personal Information</th>
+                  <th>ID Upload</th>
+                  <th>Selfie/Biometric</th>
+                  <th>IPRS</th>
+                  <th>KRA</th>
+                  <th>Compliance</th>
+                  <th>Recognition</th>
                 </tr>
               </thead>
 
@@ -163,18 +161,37 @@
                   *ngFor="let data of rows; let i = index"
                   id="t_{{ data.idNo }}"
                 >
-                  <td class="id">
-                    <a class="fw-medium link-primary"></a>
+                  <td>{{ data.idNo }}</td>
+                  <td>{{ data.name }}</td>
+
+                  <!-- Example tick/cross columns -->
+                  <td [ngClass]="data.personalInfo ? 'success' : 'failed'">
+                    {{ data.personalInfo ? "✔" : "✖" }}
                   </td>
 
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <td [ngClass]="data.idUpload ? 'success' : 'failed'">
+                    {{ data.idUpload ? "✔" : "✖" }}
+                  </td>
+
+                  <td [ngClass]="data.selfie ? 'success' : 'failed'">
+                    {{ data.selfie ? "✔" : "✖" }}
+                  </td>
+
+                  <td [ngClass]="data.iprs ? 'success' : 'failed'">
+                    {{ data.iprs ? "✔" : "✖" }}
+                  </td>
+
+                  <td [ngClass]="data.kra ? 'success' : 'failed'">
+                    {{ data.kra ? "✔" : "✖" }}
+                  </td>
+
+                  <td [ngClass]="data.compliance ? 'success' : 'failed'">
+                    {{ data.compliance ? "✔" : "✖" }}
+                  </td>
+
+                  <td [ngClass]="data.recognition ? 'success' : 'failed'">
+                    {{ data.recognition ? "✔" : "✖" }}
+                  </td>
                 </tr>
               </tbody>
             </table>

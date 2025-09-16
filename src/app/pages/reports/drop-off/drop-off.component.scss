@@ -41,17 +41,17 @@
 /* Add some minimal width to table cells for better readability */
 .table th,
 .table td {
-  min-width: 120px; /* Adjust based on your content */
+  min-width: 120px;
 }
 
 /* Keep action column buttons together */
-.table th:last-child,
-.table td:last-child {
-  min-width: 150px;
-  position: sticky;
-  right: 0;
-  background-color: #fff; /* Match your table background */
-}
+// .table th:last-child,
+// .table td:last-child {
+//   min-width: 150px;
+//   position: sticky;
+//   right: 0;
+//   background-color: #fff; /* Match your table background */
+// }
 
 /* Add shadow to indicate more content */
 .horizontal-scroll::after {
@@ -90,4 +90,15 @@
       background-color: #f8f9fa;
     }
   }
+}
+.success {
+  color: green;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.failed {
+  color: red;
+  font-weight: bold;
+  font-size: 15px;
 }
