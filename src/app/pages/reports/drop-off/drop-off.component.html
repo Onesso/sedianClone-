@@ -15,7 +15,7 @@
               <input
                 type="text"
                 class="form-control search"
-                placeholder="Search by Customer ID No."
+                placeholder="Search by National ID No."
                 [(ngModel)]="searchObject"
               />
               <i class="ri-search-line search-icon"></i>
@@ -144,15 +144,13 @@
               <!-- Keep thead fixed while scrolling -->
               <thead class="text-muted w-100">
                 <tr class="text-uppercase bg-light w-100">
-                  <th>Customer ID</th>
-                  <th>Customer Name</th>
-                  <th>Personal Information</th>
-                  <th>ID Upload</th>
-                  <th>Selfie/Biometric</th>
-                  <th>IPRS</th>
-                  <th>KRA</th>
-                  <th>Compliance</th>
-                  <th>Recognition</th>
+                  <th>National Id</th>
+                  <th>Signature</th>
+                  <th>Selfie</th>
+                  <th>Account Details</th>
+                  <th>Preference</th>
+                  <th>Next of kin</th>
+                  <th>Occupation</th>
                 </tr>
               </thead>
 
@@ -161,9 +159,6 @@
                   *ngFor="let data of rows; let i = index"
                   id="t_{{ data.idNo }}"
                 >
-                  <td>{{ data.idNo }}</td>
-                  <td>{{ data.name }}</td>
-
                   <!-- Example tick/cross columns -->
                   <td [ngClass]="data.personalInfo ? 'success' : 'failed'">
                     {{ data.personalInfo ? "✔" : "✖" }}
