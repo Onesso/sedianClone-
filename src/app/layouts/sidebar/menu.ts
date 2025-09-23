@@ -140,6 +140,12 @@ export const REPORTS_MENU: MenuItem[] = [
         link: "/app/reports/drop-off",
         parentId: 2,
       },
+      {
+        id: 215,
+        label: "Customer ip-address",
+        link: "/app/reports/customer-ip-address",
+        parentId: 2,
+      },
     ],
   },
   {

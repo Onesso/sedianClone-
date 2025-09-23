@@ -9,6 +9,7 @@ import { KraLogsComponent } from "./kra-logs/kra-logs.component";
 import { FailedIprsComponent } from "./failed-iprs/failed-iprs.component";
 import { FailedKraComponent } from "./failed-kra/failed-kra.component";
 import { DropOffComponent } from "./drop-off/drop-off.component";
+import { CustomerIpAddressComponent } from "./customer-ip-address/customer-ip-address.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {
   NgbToastModule,
@@ -47,6 +48,7 @@ import { DocumentPipe } from "./document.pipe";
     DocumentsArchivedComponent,
     ReportsPipe,
     DropOffComponent,
+    CustomerIpAddressComponent,
     DocumentPipe,
   ],
   imports: [

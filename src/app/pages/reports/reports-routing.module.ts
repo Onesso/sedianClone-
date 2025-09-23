@@ -8,6 +8,7 @@ import { IprsLogsComponent } from "./iprs-logs/iprs-logs/iprs-logs.component";
 import { KraLogsComponent } from "./kra-logs/kra-logs.component";
 import { DocumentsArchivedComponent } from "./documents-archived/documents-archived.component";
 import { DropOffComponent } from "./drop-off/drop-off.component";
+import { CustomerIpAddressComponent } from "./customer-ip-address/customer-ip-address.component";
 
 const routes: Routes = [
   {
@@ -41,6 +42,10 @@ const routes: Routes = [
   {
     path: "drop-off",
     component: DropOffComponent,
+  },
+  {
+    path: "customer-ip-address",
+    component: CustomerIpAddressComponent,
   },
 ];
 
